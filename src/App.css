@@ -1,0 +1,71 @@
+@import "tailwindcss";
+#root {
+  width:auto;
+  height: auto;
+  background-color: #fae5cd;
+}
+.btn-topbar {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem; /* p-2 = 8px */
+  border-radius: 0.2rem; /* rounded-lg */
+  background: linear-gradient(
+    to bottom left,
+    #fbbf24, /* amber-400 */
+    #b45309  /* amber-700 */
+  );
+  cursor: pointer;
+  transition: 
+    background 0.35s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.btn-topbar:hover {
+  background: linear-gradient(
+    to bottom left,
+    #f16a15,  /* amber-800 */
+    #fcd34d /* amber-300 */
+    
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.11);
+
+}
+
+.btn-topbar:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.11);
+}
+
+.btn-exit {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem; /* p-2 = 8px */
+  border-radius: 0.2rem; /* rounded-lg */
+  background: linear-gradient(
+    to bottom left,
+    #f11515,  /* amber-800 */
+    #b45309  /* amber-700 */
+  );
+  cursor: pointer;
+  transition: 
+    background 0.35s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.btn-exit:hover {
+  background: linear-gradient(
+    to bottom left,
+    #f11515,  /* amber-800 */
+    #9b0101 /* amber-300 */
+    
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.11);
+
+}
+
+.btn-exit:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.11);
+}
