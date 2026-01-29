@@ -6,6 +6,14 @@ export default function Footer() {
         <p classname="flex justify-center">PROVA</p>
         <p classname="flex justify-center">PROVA</p>
         <p classname="flex justify-center">PROVA</p>
+        <div className='flex'>
+            <p>{`© Copyright 2025 – “Le Creazioni di Patrizia” | P.IVA IT 00000000000
+Sito web gestito da TNT TECH SPA`}</p>
+            <div>
+                <img src="" alt="" />
+            </div>
+
+        </div>
     </div>
   )
 }
