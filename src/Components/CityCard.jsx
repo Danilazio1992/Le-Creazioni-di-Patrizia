@@ -32,6 +32,12 @@ function CityCard({
     </svg>
   );
 
+  let classe = [
+    "scale-95 transition-all duration-500 opacity-50",
+    "scale-105 transition-all duration-500 z-10",
+    "Scale-100",
+  ];
+
   const handleEnter = (e) => {
     setHovered(true);
     setIdHovered(+e.currentTarget.id);
@@ -44,7 +50,7 @@ function CityCard({
   return (
     <div
       id={city.id}
-      className={`flex flex-wrap rounded-2xl min-w-[280px] w-[20%] shadow-lg shadow-amber-50/60 justify-center overflow-hidden   ${idHovered === city.id ? "bg-blue-800" : idHovered !== -1 ? "bg-amber-300" : "bg-amber-950"}`}
+      className={`flex flex-wrap rounded-2xl min-w-[280px] w-[20%] shadow-lg shadow-amber-950 justify-center overflow-hidden bg-amber-950   ${idHovered === city.id ? classe[1] : idHovered !== -1 ? classe[0] : classe[2]}`}
       onMouseEnter={(e) => handleEnter(e)}
       onMouseLeave={() => handleLeave()}
     >

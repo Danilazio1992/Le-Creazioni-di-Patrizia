@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { cities } from "./assets/cities";
 import CityCard from "./Components/CityCard";
@@ -21,6 +21,22 @@ function App() {
   const handleRemove = (id) => {
     setNewData((prevData) => prevData.filter((el) => el.id !== id));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://react--course-api.herokuapp.com/api/v1/data/gelateria",
+        );
+        const data = await response.json();
+        console.log(data.data);
+      } catch (error) {
+        console.error("fetch Error", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="flex w-full h-full flex-col bg-[#fae5cdc7]">
