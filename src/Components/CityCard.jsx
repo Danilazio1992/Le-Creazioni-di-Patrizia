@@ -6,7 +6,7 @@ function CityCard({
   idHovered,
   setIdHovered,
 }) {
-  let modify = (
+  let modify = "H" /* (
     <svg
       width="20px"
       height="20px"
@@ -30,7 +30,7 @@ function CityCard({
         stroke-linejoin="round"
       />
     </svg>
-  );
+  ); */
 
   let classe = [
     "scale-95 transition-all duration-500 opacity-50",

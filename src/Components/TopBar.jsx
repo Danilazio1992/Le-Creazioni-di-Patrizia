@@ -1,5 +1,3 @@
-let liBtnClass = `flex item-center p-2 bg-gradient-to-bl from-amber-400 to-amber-700 rounded-lg `;
-
 function TopBar({ setIsModal }) {
   return (
     <div className="flex flex-row justify-between h-14 w-full bg-gradient-to-bl from-violet-400 to-fuchsia-500 ">
