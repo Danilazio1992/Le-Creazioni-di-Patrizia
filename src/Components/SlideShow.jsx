@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { cities } from "../assets/cities";
 import DotBtn from "./DotBtn";
 
 function SlideShow() {
@@ -17,8 +16,7 @@ function SlideShow() {
           throw new Error(`Errore HTTP: ${rispostaServer.status}`);
         }
         const datiRicevuti = await rispostaServer.json(); //dopo che ho ricevuto i dati gli sto dicendo ok elabora il json e rendilo utilizzabile e aspetta il risultato
-        setData(cities);
-        console.log(datiRicevuti.data);
+        setData(datiRicevuti.data);
         setIsLoading(false);
       } catch (error) {
         console.error("fetch Error", error);
@@ -33,7 +31,6 @@ function SlideShow() {
       {isLoading ? <p>caricamento</p> : <p>finito</p>}
       <div className="flex w-min-full h-fit p-2 gap-2">
         {data
-          .filter((_, i) => i < 5)
           .map((city) => (
             <div
               key={city.id}
@@ -41,8 +38,8 @@ function SlideShow() {
               className="flex h-fit w-[100%] bg-amber-50  justify-center"
             >
               <img
-                src={city.imgUrl}
-                alt={city.name}
+                src={city.img}
+                alt={city.nome}
                 id={city.id}
                 className="flex aspect-[4/3] w-[100%]"
               />
@@ -52,7 +49,6 @@ function SlideShow() {
 
       <div className="flex gap-2 p-2 h-full justify-center">
         {data
-          .filter((_, i) => i < 5)
           .map((el, i) => (
             <div className="flex" key={i + 10}>
               <DotBtn />

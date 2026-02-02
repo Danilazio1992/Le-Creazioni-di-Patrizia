@@ -10,11 +10,16 @@ function CreateCardForm({setNewData, setIsModal}) {
         isVisited: false,
     })
 
-    const handleChange = (e) =>{
-        let {value, name} = e.target
-        setCity({...city, [name]: value})
-    }
-    const handleSubmit= () => {
+ const handleChange = (e) => {
+    let { name, value, type, checked } = e.target;
+    let finalValue= type === "checkbox" ? checked : value; //check se é input:checkbox se lo é prende il valore di checked altrimenti
+    setCity({
+        ...city,
+        [name]: finalValue
+    });
+};
+    const handleSubmit= (e) => {
+        e.preventDefault()
         let {name,imgUrl,description} = city
         let dateId = Date.now()
         if(name && imgUrl && description) {
@@ -51,7 +56,7 @@ function CreateCardForm({setNewData, setIsModal}) {
             <div className='flex justify-items-start w-full'>
                 <p className='w-2/5 flex '> visitata?:</p>
                 <div className='flex w-3/5 justify-center'>
-                    <input type="checkbox" name="isVisited" />
+                    <input type="checkbox" name="isVisited" onChange={(e)=> handleChange(e)}  />
                 </div>
             </div>
             <div className='flex justify-center'>
@@ -61,7 +66,7 @@ function CreateCardForm({setNewData, setIsModal}) {
                 onMouseEnter={() => setIsHovered(!isHoverd)} 
                 onMouseLeave={()=>setIsHovered(!isHoverd)} 
                 className={`${isHoverd? " bg-blue-50 border-2 border-blue-600 text-blue-900 rounded-xl font-extrabold p-2" :"bg-blue-700 border-cyan-300 border-2 rounded-xl min text-amber-50 font-extrabold p-2"}`} 
-                onClick={()=> handleSubmit()}
+                onClick={(e)=> handleSubmit(e)}
                 />
             </div>
         </form>
