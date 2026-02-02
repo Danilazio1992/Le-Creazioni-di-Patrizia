@@ -29,7 +29,7 @@ function App() {
       <TopBar setIsModal={setIsModal} />
 
         <div className="flex flex-wrap gap-4 p-4 w-full justify-center ">
-          {newData.map((city) => (
+          {newData.filter((el,i)=> i < 4).map((city) => (
             <CityCard
               city={city}
               key={city.id}

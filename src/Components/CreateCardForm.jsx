@@ -12,7 +12,7 @@ function CreateCardForm({setNewData, setIsModal}) {
 
  const handleChange = (e) => {
     let { name, value, type, checked } = e.target;
-    let finalValue= type === "checkbox" ? checked : value; //check se é input:checkbox se lo é prende il valore di checked altrimenti
+    let finalValue= type === "checkbox" ? checked : value; //check se é input:checkbox se lo é prende il valore di checked altrimenti prende e.target.value
     setCity({
         ...city,
         [name]: finalValue

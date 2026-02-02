@@ -4,6 +4,18 @@ import DotBtn from "./DotBtn";
 function SlideShow() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true); //per gestire un render di caricamento imposto subito true fino alla modifica tramite useEffect
+  const [current,setCurrent] = useState(0)
+
+  const next = () =>{
+    if (!data.length) return;
+    setCurrent((prev) => (prev + 1) % data.length)
+  }
+
+  const prev = () =>{
+    if (!data.length) return;
+    setCurrent((prev) =>
+      prev === 0 ? data.length - 1 : prev - 1
+    )}
   useEffect(() => {
     const richiestaDati = async () => {
       try {
@@ -27,22 +39,26 @@ function SlideShow() {
   }, []);
 
   return (
-    <div className="flex w-min-full bg-amber-800 h-fit p-2 gap-2 flex-col">
+    <div className="flex w-min-full  mx-auto bg-amber-800 h-fit p-2 gap-2 flex-col">
       {isLoading ? <p>caricamento</p> : <p>finito</p>}
-      <div className="flex w-min-full h-fit p-2 gap-2">
+      <div className="overflow-hidden h-64">
+
+      <div className="flex  h-fit p-2 gap-2 transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${current * 100}%)` }}>
+        
+      
         {data
           .map((city) => (
             <div
-              key={city.id}
-              id={city.id}
-              className="flex h-fit w-[100%] bg-amber-50  justify-center"
+            key={city.id}
+            id={city.id}
+            className="flex h-fit w-[100%] bg-amber-50  justify-center"
             >
               <img
                 src={city.img}
                 alt={city.nome}
                 id={city.id}
                 className="flex aspect-[4/3] w-[100%]"
-              />
+                />
             </div>
           ))}
       </div>
@@ -54,6 +70,15 @@ function SlideShow() {
               <DotBtn />
             </div>
           ))}
+      </div>
+          </div> {/* qui */}
+      <div className="flex justify-between mt-4">
+        <button onClick={()=>prev} className="btn-topbar">
+          Prev
+        </button>
+        <button onClick={()=>next} className="btn-topbar">
+          Next
+        </button>
       </div>
     </div>
   );
