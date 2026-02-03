@@ -1,6 +1,6 @@
 @import "tailwindcss";
 #root {
-  width:auto;
+  width: auto;
   height: auto;
   background-color: #fae5cd;
 }
@@ -11,11 +11,11 @@
   border-radius: 0.2rem; /* rounded-lg */
   background: linear-gradient(
     to bottom left,
-    #fbbf24, /* amber-400 */
-    #b45309  /* amber-700 */
+    #df6c24,
+    /* amber-800 */ #eeb804 /* amber-300 */
   );
   cursor: pointer;
-  transition: 
+  transition:
     background 0.35s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -23,13 +23,11 @@
 .btn-topbar:hover {
   background: linear-gradient(
     to bottom left,
-    #f16a15,  /* amber-800 */
-    #fcd34d /* amber-300 */
-    
+    #df6c24,
+    /* amber-800 */ #eeb804 /* amber-300 */
   );
-  transform: translateY(-1px);
+  transform: translateY(1px);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.11);
-
 }
 
 .btn-topbar:active {
@@ -44,11 +42,11 @@
   border-radius: 0.2rem; /* rounded-lg */
   background: linear-gradient(
     to bottom left,
-    #f11515,  /* amber-800 */
-    #b45309  /* amber-700 */
+    #f11515,
+    /* amber-800 */ #b45309 /* amber-700 */
   );
   cursor: pointer;
-  transition: 
+  transition:
     background 0.35s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -56,13 +54,11 @@
 .btn-exit:hover {
   background: linear-gradient(
     to bottom left,
-    #f11515,  /* amber-800 */
-    #9b0101 /* amber-300 */
-    
+    #f11515,
+    /* amber-800 */ #9b0101 /* amber-300 */
   );
   transform: translateY(-1px);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.11);
-
 }
 
 .btn-exit:active {

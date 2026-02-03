@@ -4,18 +4,21 @@ import DotBtn from "./DotBtn";
 function SlideShow() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true); //per gestire un render di caricamento imposto subito true fino alla modifica tramite useEffect
-  const [current,setCurrent] = useState(0)
+  const [current, setCurrent] = useState(0);
 
-  const next = () =>{
-    if (!data.length) return;
-    setCurrent((prev) => (prev + 1) % data.length)
-  }
+  useEffect(() => {
+    console.log(current);
+  }, [current]);
 
-  const prev = () =>{
+  const nextSlide = () => {
     if (!data.length) return;
-    setCurrent((prev) =>
-      prev === 0 ? data.length - 1 : prev - 1
-    )}
+    setCurrent((prev) => (prev + 1) % data.length);
+  };
+
+  const prevSlide = () => {
+    if (!data.length) return;
+    setCurrent((prev) => (prev === 0 ? data.length - 1 : prev - 1));
+  };
   useEffect(() => {
     const richiestaDati = async () => {
       try {
@@ -39,46 +42,50 @@ function SlideShow() {
   }, []);
 
   return (
-    <div className="flex w-min-full  mx-auto bg-amber-800 h-fit p-2 gap-2 flex-col">
-      {isLoading ? <p>caricamento</p> : <p>finito</p>}
-      <div className="overflow-hidden h-64">
-
-      <div className="flex  h-fit p-2 gap-2 transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${current * 100}%)` }}>
-        
-      
-        {data
-          .map((city) => (
-            <div
-            key={city.id}
-            id={city.id}
-            className="flex h-fit w-[100%] bg-amber-50  justify-center"
-            >
-              <img
-                src={city.img}
-                alt={city.nome}
-                id={city.id}
-                className="flex aspect-[4/3] w-[100%]"
+    <div className="prova flex flex-col bg-amber-50 h-full w-full">
+      <div className="flex justify-center p-4 h-96 relative">
+        <div className="relative overflow-hidden w-4/5 shadow-md shadow-amber-900 rounded-[10px] ">
+          <div
+            className="flex transition-transform duration-1000 ease-in-out h-full"
+            style={{ transform: `translateX(-${current * 100}%)` }}
+          >
+            {data.map((slide) => (
+              <div
+                key={slide.id}
+                id={slide.id}
+                className="flex min-w-full justify-center "
+              >
+                <img
+                  src={slide.img}
+                  alt={slide.nome}
+                  id={slide.id}
+                  className=" w-full h-full object-cover object-center"
                 />
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="absolute flex  z-10 w-full h-full justify-between items-center">
+          <button
+            className="flex btn-topbar font-extrabold h-fit w-fit"
+            onClick={() => prevSlide()}
+          >
+            PREV
+          </button>
+          <button
+            className="flex btn-topbar font-extrabold h-fit w-fit"
+            onClick={() => nextSlide()}
+          >
+            NEXT
+          </button>
+        </div>
       </div>
-
-      <div className="flex gap-2 p-2 h-full justify-center">
-        {data
-          .map((el, i) => (
-            <div className="flex" key={i + 10}>
-              <DotBtn />
-            </div>
-          ))}
-      </div>
-          </div> {/* qui */}
-      <div className="flex justify-between mt-4">
-        <button onClick={()=>prev} className="btn-topbar">
-          Prev
-        </button>
-        <button onClick={()=>next} className="btn-topbar">
-          Next
-        </button>
+      <div className="flex gap-2 p-2 h-fit justify-center">
+        {data.map((el, i) => (
+          <div className="flex" key={i + 10}>
+            <DotBtn />
+          </div>
+        ))}
       </div>
     </div>
   );
