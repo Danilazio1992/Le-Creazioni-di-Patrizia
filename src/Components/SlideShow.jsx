@@ -7,7 +7,8 @@ function SlideShow() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    console.log(current);
+    const timer = setTimeout(nextSlide, 3000);
+    return () => clearTimeout(timer);
   }, [current]);
 
   const nextSlide = () => {
@@ -19,6 +20,11 @@ function SlideShow() {
     if (!data.length) return;
     setCurrent((prev) => (prev === 0 ? data.length - 1 : prev - 1));
   };
+  const goToSlide = (e) => {
+    if (!data.length) return;
+    setCurrent(e.target.value);
+  };
+
   useEffect(() => {
     const richiestaDati = async () => {
       try {
@@ -42,9 +48,9 @@ function SlideShow() {
   }, []);
 
   return (
-    <div className="prova flex flex-col bg-amber-50 h-full w-full">
+    <div className="flex flex-col bg-amber-50 h-full w-full">
       <div className="flex justify-center p-4 h-96 relative">
-        <div className="relative overflow-hidden w-4/5 shadow-md shadow-amber-900 rounded-[10px] ">
+        <div className="relative overflow-hidden w-[50%] shadow-md shadow-amber-900 rounded-[10px] ">
           <div
             className="flex transition-transform duration-1000 ease-in-out h-full"
             style={{ transform: `translateX(-${current * 100}%)` }}
@@ -65,7 +71,7 @@ function SlideShow() {
             ))}
           </div>
         </div>
-        <div className="absolute flex  z-10 w-full h-full justify-between items-center">
+        <div className="absolute flex z-10 w-2/5 h-full justify-between items-center p-2">
           <button
             className="flex btn-topbar font-extrabold h-fit w-fit"
             onClick={() => prevSlide()}
@@ -82,8 +88,8 @@ function SlideShow() {
       </div>
       <div className="flex gap-2 p-2 h-fit justify-center">
         {data.map((el, i) => (
-          <div className="flex" key={i + 10}>
-            <DotBtn />
+          <div className="flex" key={i}>
+            <DotBtn current={current} i={i} goToSlide={goToSlide} />
           </div>
         ))}
       </div>

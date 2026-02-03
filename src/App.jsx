@@ -4,8 +4,8 @@ import { cities } from "./assets/cities";
 import CityCard from "./Components/CityCard";
 import Footer from "./Components/Footer";
 import Modal from "./Components/Modal";
-import TopBar from "./Components/TopBar";
 import SlideShow from "./Components/SlideShow";
+import TopBar from "./Components/TopBar";
 
 function App() {
   const [newData, setNewData] = useState(cities);
@@ -28,8 +28,10 @@ function App() {
       {isModal && <Modal setIsModal={setIsModal} setNewData={setNewData} />}
       <TopBar setIsModal={setIsModal} />
 
-        <div className="flex flex-wrap gap-4 p-4 w-full justify-center ">
-          {newData.filter((el,i)=> i < 4).map((city) => (
+      <div className="flex flex-wrap gap-4 p-4 w-full justify-center ">
+        {newData
+          .filter((el, i) => i < 6)
+          .map((city) => (
             <CityCard
               city={city}
               key={city.id}
@@ -40,7 +42,7 @@ function App() {
               setIdHovered={setIdHovered}
             />
           ))}
-        </div>
+      </div>
       <SlideShow />
 
       <Footer />

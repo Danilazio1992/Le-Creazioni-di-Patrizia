@@ -6,7 +6,7 @@ function CityCard({
   idHovered,
   setIdHovered,
 }) {
-  let modify = "H" /* (
+  let modify = "H"; /* (
     <svg
       width="20px"
       height="20px"
@@ -50,7 +50,7 @@ function CityCard({
   return (
     <div
       id={city.id}
-      className={`flex flex-wrap rounded-2xl min-w-[280px] w-[20%] shadow-lg shadow-amber-950 justify-center overflow-hidden bg-amber-950   ${idHovered === city.id ? classe[1] : idHovered !== -1 ? classe[0] : classe[2]}`}
+      className={`flex flex-wrap rounded-2xl min-w-[280px] w-[15%] shadow-lg shadow-amber-950 justify-center overflow-hidden bg-amber-950   ${idHovered === city.id ? classe[1] : idHovered !== -1 ? classe[0] : classe[2]}`}
       onMouseEnter={(e) => handleEnter(e)}
       onMouseLeave={() => handleLeave()}
     >
