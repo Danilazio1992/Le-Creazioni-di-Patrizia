@@ -42,6 +42,8 @@ function SlideShow() {
       } catch (error) {
         console.error("fetch Error", error);
         setIsLoading(true);
+      } finally {
+        setIsLoading(false);
       }
     };
     richiestaDati();
@@ -49,50 +51,58 @@ function SlideShow() {
 
   return (
     <div className="flex flex-col bg-amber-50 h-full w-full">
-      <div className="flex justify-center p-4 h-96 relative">
-        <div className="relative overflow-hidden w-[50%] shadow-md shadow-amber-900 rounded-[10px] ">
-          <div
-            className="flex transition-transform duration-1000 ease-in-out h-full"
-            style={{ transform: `translateX(-${current * 100}%)` }}
-          >
-            {data.map((slide) => (
+      {isLoading ? (
+        <div className="flex justify-center items-center h-96">
+          <p className="text-xl font-bold">Loading...</p>
+        </div>
+      ) : (
+        <>
+          <div className="flex justify-center p-4 h-96 relative">
+            <div className="relative overflow-hidden w-[50%] shadow-md shadow-amber-900 rounded-[10px] ">
               <div
-                key={slide.id}
-                id={slide.id}
-                className="flex min-w-full justify-center "
+                className="flex transition-transform duration-1000 ease-in-out h-full"
+                style={{ transform: `translateX(-${current * 100}%)` }}
               >
-                <img
-                  src={slide.img}
-                  alt={slide.nome}
-                  id={slide.id}
-                  className=" w-full h-full object-cover object-center"
-                />
+                {data.map((slide) => (
+                  <div
+                    key={slide.id}
+                    id={slide.id}
+                    className="flex min-w-full justify-center "
+                  >
+                    <img
+                      src={slide.img}
+                      alt={slide.nome}
+                      id={slide.id}
+                      className=" w-full h-full object-cover object-center"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="absolute flex z-10 w-2/5 h-full justify-between items-center p-2">
+              <button
+                className="flex btn-topbar font-extrabold h-fit w-fit"
+                onClick={() => prevSlide()}
+              >
+                PREV
+              </button>
+              <button
+                className="flex btn-topbar font-extrabold h-fit w-fit"
+                onClick={() => nextSlide()}
+              >
+                NEXT
+              </button>
+            </div>
+          </div>
+          <div className="flex gap-2 p-2 h-fit justify-center">
+            {data.map((el, i) => (
+              <div className="flex" key={i}>
+                <DotBtn current={current} i={i} goToSlide={goToSlide} />
               </div>
             ))}
           </div>
-        </div>
-        <div className="absolute flex z-10 w-2/5 h-full justify-between items-center p-2">
-          <button
-            className="flex btn-topbar font-extrabold h-fit w-fit"
-            onClick={() => prevSlide()}
-          >
-            PREV
-          </button>
-          <button
-            className="flex btn-topbar font-extrabold h-fit w-fit"
-            onClick={() => nextSlide()}
-          >
-            NEXT
-          </button>
-        </div>
-      </div>
-      <div className="flex gap-2 p-2 h-fit justify-center">
-        {data.map((el, i) => (
-          <div className="flex" key={i}>
-            <DotBtn current={current} i={i} goToSlide={goToSlide} />
-          </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 }
