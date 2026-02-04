@@ -22,7 +22,7 @@ function SlideShow() {
   };
   const goToSlide = (e) => {
     if (!data.length) return;
-    setCurrent(e.target.value);
+    setCurrent(Number(e.target.value));
   };
 
   useEffect(() => {
