@@ -1,8 +1,11 @@
-function TopBar({ setIsModal }) {
+function TopBar({ dispatch }) {
   return (
     <div className="flex flex-row justify-between h-14 w-full bg-gradient-to-bl from-violet-400 to-fuchsia-500 ">
       <ul className="flex flex-row justify-items-end p-2 gap-2">
-        <li className="btn-topbar" onClick={() => setIsModal(true)}>
+        <li
+          className="btn-topbar"
+          onClick={() => dispatch({ type: "openModal" })}
+        >
           Home
         </li>
         <li className="btn-topbar">prodotti</li>

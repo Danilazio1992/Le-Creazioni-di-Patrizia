@@ -65,18 +65,13 @@ function CityCard({
             {modify}
           </button>
           <button className="btn-exit" onClick={() => handleRemove(city.id)}>
-            {" "}
-            X{" "}
+            X
           </button>
         </div>
       </div>
       <div className="relative flex flex-col justify-between items-center ">
-        <h2 className="p-2 flex justify-center font-extrabold">
-          {" "}
-          {city.name}{" "}
-        </h2>
+        <h2 className="p-2 flex justify-center font-extrabold">{city.name}</h2>
         <p className="p-2 flex justify-center text-center h-fit">
-          {" "}
           {city.description.length > 100
             ? `${city.description.slice(0, 78)}... 
         Continua a leggere`
