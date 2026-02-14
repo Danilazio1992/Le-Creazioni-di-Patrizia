@@ -1,7 +1,9 @@
+import logo from "../assets/logo.png";
 function TopBar({ dispatch }) {
   return (
-    <div className="flex flex-row justify-between h-14 w-full bg-gradient-to-bl from-violet-400 to-fuchsia-500 ">
+    <div className="flex flex-row justify-between h-34 w-full bg-gradient-to-b from-amber-900/90 to-amber-50/10 ">
       <ul className="flex flex-row justify-items-end p-2 gap-2">
+        <img className="h-full flex" src={logo} alt="" />
         <li
           className="btn-topbar"
           onClick={() => dispatch({ type: "openModal" })}

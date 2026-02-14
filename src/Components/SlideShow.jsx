@@ -15,7 +15,6 @@ function SlideShow() {
     if (!data.length) return;
     setCurrent((prev) => (prev + 1) % data.length);
   };
-
   const prevSlide = () => {
     if (!data.length) return;
     setCurrent((prev) => (prev === 0 ? data.length - 1 : prev - 1));
