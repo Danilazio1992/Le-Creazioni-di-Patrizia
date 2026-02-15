@@ -12,7 +12,6 @@ function App() {
   const [newData, setNewData] = useState(cities);
   const [idHovered, setIdHovered] = useState(null);
   const [hovered, setHovered] = useState(false);
-  const [isModal, setIsModal] = useState(false);
 
   const initialState = {
     newData: cities,
@@ -42,7 +41,7 @@ function App() {
   };
 
   useEffect(() => {
-    const spotTimer = setTimeout(() => dispatch({ type: "spot" }), 5000);
+    const spotTimer = setTimeout(() => dispatch({ type: "spot" }), 10000);
     return () => clearTimeout(spotTimer);
   }, []);
 
