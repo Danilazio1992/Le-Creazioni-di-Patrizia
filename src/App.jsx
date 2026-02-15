@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import "./App.css";
 import { cities } from "./assets/cities";
 import CityCard from "./Components/CityCard";
@@ -19,6 +19,7 @@ function App() {
     idHovered: null,
     hovered: false,
     isModal: false,
+    modalContent: null,
   };
 
   function reducer(state, action) {
@@ -27,7 +28,9 @@ function App() {
         console.log("apro modale");
         return { ...state, isModal: true };
       case "closeModal":
-        return { ...state, isModal: false };
+        return { ...state, isModal: false, modalContent: null };
+      case "spot":
+        return { ...state, isModal: true, modalContent: "Spot" };
       default:
         return state;
     }
@@ -38,9 +41,16 @@ function App() {
     setNewData((prevData) => prevData.filter((el) => el.id !== id));
   };
 
+  useEffect(() => {
+    const spotTimer = setTimeout(() => dispatch({ type: "spot" }), 5000);
+    return () => clearTimeout(spotTimer);
+  }, []);
+
   return (
     <div className="flex w-full h-full flex-col bg-[#fae5cdc7]">
-      {state.isModal && <Modal dispatch={dispatch} setNewData={setNewData} />}
+      {state.isModal && (
+        <Modal dispatch={dispatch} setNewData={setNewData} state={state} />
+      )}
       <TopBar dispatch={dispatch} />
       {/* <SideBar /> */}
 
@@ -60,13 +70,6 @@ function App() {
           ))}
       </div>
       <SlideShow />
-      <button
-        type="button"
-        className="btn-topbar"
-        onClick={() => dispatch({ type: "openModal" })}
-      >
-        DIOCANE
-      </button>
       <Dropdown />
 
       <Footer />

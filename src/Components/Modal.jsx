@@ -1,5 +1,5 @@
 import CreateCardForm from "./CreateCardForm";
-function Modal({ dispatch, setNewData }) {
+function Modal({ dispatch, setNewData, state }) {
   return (
     <div
       className="flex fixed bg-gray-950/40 z-100 h-screen w-screen top-0 left-0 justify-center items-center "
@@ -20,7 +20,11 @@ function Modal({ dispatch, setNewData }) {
         >
           X
         </button>
-        <CreateCardForm setNewData={setNewData} dispatch={dispatch} />
+        {state.modalContent === "Spot" ? (
+          <div className="bg-red-600 w-[80%] h-[80%]">porco dio</div>
+        ) : (
+          <CreateCardForm setNewData={setNewData} dispatch={dispatch} />
+        )}
       </div>
     </div>
   );

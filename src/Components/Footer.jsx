@@ -17,9 +17,9 @@ const OurBusiness = [
 
 export default function Footer() {
   return (
-    <div className="flex flex-col h-full w-full">
-      <div className="flex flex-row p-4 h-fit w-full text-amber-950 bg-[#fff8f1] justify-center gap-80">
-        <div className="flex flex-col h-full">
+    <div className="main flex flex-col h-full w-full justify-center ">
+      <div className="flex flex-row p-4 h-fit w-full text-amber-950 bg-[#fff8f1] justify-between ">
+        <div className="primary flex flex-col h-full">
           <img className="flex w-48" src={logo} alt="" />
           <div className="flex flex-col p-2 h-fit">
             <h1 className=" text-xl p-2 font-extrabold">Contatti</h1>
@@ -46,11 +46,13 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col p-2 h-full ">
-          <h1 className=" text-2xl p-2 font-extrabold">La Nostra Azienda</h1>
-          <ul className="flex flex-col">
+        <div className="secondary flex flex-col p-2 h-full ">
+          <h1 className=" text-2xl p-2 font-extrabold w-full">
+            La Nostra Azienda
+          </h1>
+          <ul className="flex flex-col w-full">
             {OurBusiness.map((el, i) => (
-              <li key={i} className="p-2 flex">
+              <li key={i} className="p-1 flex ">
                 <p className=" cursor-pointer hover:text-blue-600 hover:font-bold ">
                   {el}
                 </p>
