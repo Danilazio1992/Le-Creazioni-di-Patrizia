@@ -5,6 +5,7 @@ import CityCard from "./Components/CityCard";
 import Dropdown from "./Components/Dropdown";
 import Footer from "./Components/Footer";
 import Modal from "./Components/Modal";
+import SideBar from "./Components/SideBar";
 import SlideShow from "./Components/SlideShow";
 import TopBar from "./Components/TopBar";
 
@@ -19,6 +20,7 @@ function App() {
     hovered: false,
     isModal: false,
     modalContent: null,
+    isSideBar: false,
   };
 
   function reducer(state, action) {
@@ -30,6 +32,10 @@ function App() {
         return { ...state, isModal: false, modalContent: null };
       case "spot":
         return { ...state, isModal: true, modalContent: "Spot" };
+      case "openSideBar":
+        return { ...state, isSideBar: true };
+      case "closeSideBar":
+        return { ...state, isSideBar: false };
       default:
         return state;
     }
@@ -51,8 +57,6 @@ function App() {
         <Modal dispatch={dispatch} setNewData={setNewData} state={state} />
       )}
       <TopBar dispatch={dispatch} />
-      {/* <SideBar /> */}
-
       <div className="flex flex-wrap gap-4 p-4 w-full justify-center ">
         {newData
           .filter((el, i) => i < 10)
@@ -70,6 +74,9 @@ function App() {
       </div>
       <SlideShow />
       <Dropdown />
+      {state.isSideBar && (
+        <SideBar dispatch={dispatch} isSidebar={state.isSideBar} />
+      )}
 
       <Footer />
     </div>

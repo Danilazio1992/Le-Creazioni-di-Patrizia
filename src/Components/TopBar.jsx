@@ -10,7 +10,12 @@ function TopBar({ dispatch }) {
         >
           Home
         </li>
-        <li className="btn-topbar">prodotti</li>
+        <li
+          className="btn-topbar"
+          onClick={() => dispatch({ type: "openSideBar" })}
+        >
+          prodotti
+        </li>
         <li className="btn-topbar">chi siamo?</li>
         <li className="btn-topbar"> contatti</li>
       </ul>
