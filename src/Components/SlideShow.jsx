@@ -56,7 +56,7 @@ function SlideShow() {
         </div>
       ) : (
         <>
-          <div className="flex justify-center p-4 h-96 relative">
+          <div className="flex justify-center p-4 max-lg:h-[20rem] h-[30rem] relative">
             <div className="relative overflow-hidden w-[50%] shadow-md shadow-amber-900 rounded-[10px] ">
               <div
                 className="flex transition-transform duration-1000 ease-in-out h-full"

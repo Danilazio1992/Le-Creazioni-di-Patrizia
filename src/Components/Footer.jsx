@@ -22,8 +22,8 @@ const OurBusiness = [
 export default function Footer() {
   return (
     <footer className="main flex flex-col h-full w-full justify-center font ">
-      <div className="flex flex-row p-4 h-fit w-full text-amber-950 bg-[#fff8f1] justify-around ">
-        <div className="primary flex flex-row h-full items-center">
+      <div className="flex max-lg:flex-col flex-row p-4 h-fit w-full text-amber-950 bg-[#fff8f1] justify-around">
+        <div className="primary flex h-full items-center max-lg:flex-col  ">
           <img className="flex w-76 h-fit" src={logo} alt="" />
           <div className="flex flex-col p-2 h-fit gap-1.5">
             <h1 className=" text-xl pt-2 pb-2 font-extrabold">Contatti</h1>
@@ -66,19 +66,19 @@ export default function Footer() {
             </section>
           </div>
         </div>
-        <div className="secondary flex flex-col p-2 h-full ">
-          <h1 className=" text-2xl p-2 font-extrabold w-full">
+        <div className="secondary flex flex-col p-2 h-full max-lg:justify-center">
+          <h1 className="flex text-2xl p-2 font-extrabold w-full max-lg:justify-center">
             La Nostra Azienda
           </h1>
-          <ul className="flex flex-col w-full">
+          <ul className="flex flex-col w-full max-lg:justify-center ">
             {OurBusiness.map((el, i) => (
-              <li key={i} className="p-1 flex ">
-                <p className=" cursor-pointer hover:font-bold ">{el}</p>
+              <li key={i} className="p-1 flex max-lg:justify-center">
+                <p className="flex cursor-pointer hover:font-bold ">{el}</p>
               </li>
             ))}
           </ul>
         </div>
-        <p className="flex justify-center">Iscriviti alla nostra NewsLetter</p>
+        <h1 className="flex justify-center font-extrabold">Iscriviti alla nostra NewsLetter</h1>
       </div>
       <div className="flex justify-center items-center h-16 text-amber-950">
         <p>{`© Copyright 2025 – “Le Creazioni di Patrizia” | P.IVA IT 00000000000
