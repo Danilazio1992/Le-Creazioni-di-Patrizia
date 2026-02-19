@@ -5,6 +5,7 @@ function SlideShow() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true); //per gestire un render di caricamento imposto subito true fino alla modifica tramite useEffect
   const [current, setCurrent] = useState(0);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(nextSlide, 3000);
@@ -38,9 +39,9 @@ function SlideShow() {
         const datiRicevuti = await rispostaServer.json(); //dopo che ho ricevuto i dati gli sto dicendo ok elabora il json e rendilo utilizzabile e aspetta il risultato
         setData(datiRicevuti.data);
         setIsLoading(false);
-      } catch (error) {
-        console.error("fetch Error", error);
-        setIsLoading(true);
+      } catch (err) {
+        console.error("fetch Error", err);
+        setError(err.message || "Errore di rete")
       } finally {
         setIsLoading(false);
       }
@@ -54,7 +55,11 @@ function SlideShow() {
         <div className="flex justify-center items-center h-96">
           <p className="text-xl font-bold">Loading...</p>
         </div>
-      ) : (
+      ) : error ? (
+  <div className="flex justify-center items-center h-96 text-gray-700">
+    <p className="text-xl font-bold">Errore: {error}</p>
+  </div>
+) : (
         <>
           <div className="flex justify-center p-4 max-lg:h-[20rem] h-[30rem] relative">
             <div className="relative overflow-hidden w-[50%] shadow-md shadow-amber-900 rounded-[10px] ">
