@@ -37,7 +37,7 @@ function App() {
       case "closeSideBar":
         return { ...state, isSideBar: false };
       default:
-        return state;
+        return state; //return default sempre state cosi che in caso di azione non riconosciuta non si rompe l'app
     }
   }
   const [state, dispatch] = useReducer(reducer, initialState);
