@@ -1,20 +1,15 @@
-import { useEffect, useReducer, useState } from "react";
+import { useState } from "react";
 import "./App.css";
+import AppRoutes from "./AppRoutes";
 import { cities } from "./assets/cities";
-import CityCard from "./Components/CityCard";
-import Dropdown from "./Components/Dropdown";
 import Footer from "./Components/Footer";
-import Modal from "./Components/Modal";
-import SideBar from "./Components/SideBar";
-import SlideShow from "./Components/SlideShow";
 import TopBar from "./Components/TopBar";
-
 function App() {
   const [newData, setNewData] = useState(cities);
   const [idHovered, setIdHovered] = useState(null);
   const [hovered, setHovered] = useState(false);
 
-  const initialState = {
+  /* const initialState = {
     newData: cities,
     idHovered: null,
     hovered: false,
@@ -50,34 +45,14 @@ function App() {
     const spotTimer = setTimeout(() => dispatch({ type: "spot" }), 10000);
     return () => clearTimeout(spotTimer);
   }, []);
-
+ */
   return (
     <div className="flex w-full h-full flex-col bg-[#fae5cdc7]">
-      {state.isModal && (
+      {/* {state.isModal && (
         <Modal dispatch={dispatch} setNewData={setNewData} state={state} />
-      )}
-      <TopBar dispatch={dispatch} />
-      <div className="flex flex-wrap gap-4 p-4 w-full justify-center ">
-        {newData
-          .filter((el, i) => i < 10)
-          .map((city) => (
-            <CityCard
-              city={city}
-              key={city.id}
-              handleRemove={handleRemove}
-              hovered={hovered}
-              setHovered={setHovered}
-              idHovered={idHovered}
-              setIdHovered={setIdHovered}
-            />
-          ))}
-      </div>
-      <SlideShow />
-      <Dropdown />
-      {state.isSideBar && (
-        <SideBar dispatch={dispatch} isSidebar={state.isSideBar} />
-      )}
-
+      )} */}
+      <TopBar />
+      <AppRoutes />
       <Footer />
     </div>
   );
