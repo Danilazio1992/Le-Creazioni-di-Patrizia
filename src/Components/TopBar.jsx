@@ -13,13 +13,15 @@ function TopBar({ dispatch }) {
         >
           Home
         </li>
-        <li
-          className="btn-topbar"
-          onClick={() => dispatch({ type: "openSideBar" })}
-        >
-          prodotti
-        </li>
         <NavLink to="/Product">
+          <li
+            className="btn-topbar"
+            onClick={() => dispatch({ type: "openSideBar" })}
+          >
+            prodotti
+          </li>
+        </NavLink>
+        <NavLink to="/chisiamo">
           <li className="btn-topbar">chi siamo?</li>
         </NavLink>
         <li className="btn-topbar"> contatti</li>

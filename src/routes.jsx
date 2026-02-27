@@ -1,6 +1,7 @@
-import ErrorPage from "./Template/ErrorPage";
-import Home from "./Template/Home";
-import SingleProduct from "./Template/SingleProduct";
+import ChiSiamo from "./Screen/ChiSiamo";
+import ErrorPage from "./Screen/ErrorPage";
+import Home from "./Screen/Home";
+import SingleProduct from "./Screen/SingleProduct";
 
 export const routes = [
   {
@@ -14,5 +15,9 @@ export const routes = [
   {
     path: "/product",
     element: <SingleProduct />,
+  },
+  {
+    path: "/chisiamo",
+    element: <ChiSiamo />,
   },
 ];
