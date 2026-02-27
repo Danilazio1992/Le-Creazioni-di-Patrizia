@@ -1,6 +1,6 @@
 function SingleProduct() {
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center h-screen">
       <div className=" flex w-[90%] justify-center bg-amber-50 text-amber-950">
         <div className="flex flex-row h-96 p-2 gap-0.5 items-center">
           <div className="flex aspect-square h-full bg-amber-300 items-center justify-center rounded-md">
@@ -23,7 +23,11 @@ function SingleProduct() {
             </ul>
           </div>
         </div>
-        <div className="bg-red-700/50 w-full">scheda Tecnica</div>
+        <div className="bg-amber-50 w-full rounded-md p-2">
+          <h2>Nome Prodotto</h2>
+          <hr />
+          <div></div>
+        </div>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
 } from "react-icons/lia";
 import { TfiYoutube } from "react-icons/tfi";
 import logo from "../assets/logo.png";
+import { useUi } from "../UiContext/uiContext";
 const OurBusiness = [
   "Chi Siamo",
   "Condizioni di Vendita",
@@ -20,6 +21,7 @@ const OurBusiness = [
 ];
 
 export default function Footer() {
+  const { state: uiState, dispatch: uiDispatch } = useUi();
   return (
     <footer className="main flex flex-col h-full w-full justify-center font ">
       <div className="flex max-lg:flex-col flex-row p-4 h-fit w-full text-amber-950 bg-[#fff8f1] justify-around">
@@ -62,7 +64,10 @@ export default function Footer() {
               <LiaInstagram className="cursor-pointer text-amber-950 font-extrabold  hover:text-amber-50 hover:bg-amber-950 rounded-sm" />
               <LiaWhatsapp className="cursor-pointer text-amber-950 font-extrabold  hover:text-amber-50 hover:bg-amber-950 rounded-sm" />
               <AiFillTikTok className="cursor-pointer text-amber-950 font-extrabold  hover:text-[#fae5cd] hover:bg-amber-950 rounded-sm" />
-              <TfiYoutube className="cursor-pointer p-1.5 text-amber-950 font-extrabold  hover:text-[#fae5cd] hover:bg-amber-950 rounded-sm" />
+              <TfiYoutube
+                className="cursor-pointer p-1.5 text-amber-950 font-extrabold  hover:text-[#fae5cd] hover:bg-amber-950 rounded-sm"
+                onClick={() => console.log(uiState)}
+              />
             </section>
           </div>
         </div>
@@ -78,7 +83,11 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <h1 className="flex justify-center font-extrabold">Iscriviti alla nostra NewsLetter</h1>
+        <div className="secondary flex flex-col p-2 h-full max-lg:justify-center">
+          <h1 className="flex text-2xl p-2 font-extrabold w-full max-lg:justify-center">
+            Iscriviti alla nostra NewsLetter
+          </h1>
+        </div>
       </div>
       <div className="flex justify-center items-center h-16 text-amber-950">
         <p>{`© Copyright 2025 – “Le Creazioni di Patrizia” | P.IVA IT 00000000000
