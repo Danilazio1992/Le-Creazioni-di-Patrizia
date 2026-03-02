@@ -1,9 +1,11 @@
+import { useUi } from "../UiContext/uiContext";
 import CreateCardForm from "./CreateCardForm";
-function Modal({ dispatch, setNewData, state }) {
+function Modal() {
+  const { state: uiState, dispatch: uiDispatch } = useUi();
   return (
     <div
       className="flex fixed bg-gray-950/40 z-100 h-screen w-screen top-0 left-0 justify-center items-center "
-      onClick={() => dispatch({ type: "closeModal" })}
+      onClick={() => uiDispatch({ type: "closeModal" })}
     >
       <div
         className="relative flex flex-col h-[75%] w-[80%] bg-white justify-center shadow-md shadow-amber-900 rounded-xl p-4"
@@ -16,14 +18,14 @@ function Modal({ dispatch, setNewData, state }) {
         </div>
         <button
           className=" bg-amber-300 flex absolute w-fit h-fit p-2 font-extrabold text-amber-950 border-2 border-amber-700 rounded-lg top-2 right-2"
-          onClick={() => dispatch({ type: "closeModal" })}
+          onClick={() => uiDispatch({ type: "closeModal" })}
         >
           X
         </button>
-        {state.modalContent === "Spot" ? (
+        {uiState.modalContent === "Spot" ? (
           <div className="bg-red-600 w-[80%] h-[80%]">porco dio</div>
         ) : (
-          <CreateCardForm setNewData={setNewData} dispatch={dispatch} />
+          <CreateCardForm />
         )}
       </div>
     </div>

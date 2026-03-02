@@ -1,6 +1,6 @@
 export function uiReducer(state, action) {
   switch (action.type) {
-    case "openModal":
+    case "OPEN_MODAL":
       console.log("apro modale");
       return { ...state, isModal: true };
     case "closeModal":
