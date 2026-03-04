@@ -38,9 +38,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-1 group relative">
                 <LiaWhatsapp className=" text-amber-950" />
+                <a href="https://wa.me/393398089996">
                 <label className=" font-bold">whatsapp:</label>
-                <a href="https://wa.me/393398089996">+393398089996</a>
-                <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all duration-1000 group-hover:w-[80%]"></span>
+                +393398089996
+                <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all ease duration-1000 group-hover:w-[80%]"></span>
+                </a>
               </li>
               <li className="flex items-center gap-1 group relative">
                 <LiaMapMarkerAltSolid className=" text-amber-950" />

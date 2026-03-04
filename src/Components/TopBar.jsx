@@ -28,7 +28,9 @@ function TopBar({ dispatch }) {
       </ul>
       <ul className="flex flex-row p-2 gap-4 items-center justify-center text-center">
         <li className="btn-topbar">Registrati</li>
+        <NavLink to="/Login">
         <li className="btn-topbar">Accedi</li>
+        </NavLink>
       </ul>
     </div>
   );
