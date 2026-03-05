@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 import { fakeUsers } from "../assets/fakeUsers";
+import {useAuth} from "../AuthContext/authContext"
 
 function Login() {
   const navigate = useNavigate();
@@ -8,15 +9,28 @@ function Login() {
     email: "",
     password: "",
   });
+  const{state:authState, dispatch: authDispatch}=useAuth()
   const handleChange = (e) => {
     let { name, value } = e.target;
     setLogin({ ...login, [name]: value });
-    console.log(login);
   };
-  const handleLogin = (fakeUsers) =>
-    fakeUsers.find((el) => {
-      login.email === el.email ? el : "utente non trovato";
-    });
+  const handleLogin = (fakeUsers) => {
+    let user = fakeUsers.find((el) =>el.email === login.email)
+        if(user){
+            if(user.password === login.password){
+                authDispatch({type:"LOGIN_SUCCESS", payload: user})
+                navigate("/")
+                setLogin({email:"",password:""})
+                console.log("ho loggato")
+            } else {
+                alert("password Errata")
+                setLogin({...login, password:""})
+            }
+        } else {
+            alert("email Sbagliata")
+            setLogin({email:"",password:""})
+        }
+    };
 
   return (
     <div className="flex flex-col w-full h-96 justify-center items-center gap-2 bg-amber-50">

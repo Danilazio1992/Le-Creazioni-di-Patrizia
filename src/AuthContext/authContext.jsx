@@ -1,19 +1,16 @@
 import { createContext, useContext, useReducer } from "react";
 import authInitialState from "./authInitialState";
-import { authReducer } from "./AuthReducer";
+import { authReducer } from "./authReducer";
 
 const authContext = createContext(null); // null è il valore inizilializzato che decidiamo di dargli
 
 const logToken = "logToken";
 
 //passiamo children per far si che tutto cio che wrappa viene riportato così come e che i child possano accedere al context
-export function authProvider({ children }) {
-  const [state, dispatch] = useReducer(authInitialState, authReducer);
+export function AuthProvider({ children }) {
+  const [state, dispatch] = useReducer(authReducer, authInitialState);
 
-  const value = {
-    state,
-    dispatch,
-  };
+  const value = { state, dispatch };
 
   return (
     <authContext.Provider value={value}>

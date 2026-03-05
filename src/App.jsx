@@ -5,6 +5,7 @@ import { cities } from "./assets/cities";
 import Footer from "./Components/Footer";
 import TopBar from "./Components/TopBar";
 import { useUi } from "./UiContext/uiContext";
+import SideBar from "./Components/SideBar";
 function App() {
   const [newData, setNewData] = useState(cities);
   const { state: uiState, dispatch: uiDispatch } = useUi();
@@ -21,6 +22,7 @@ function App() {
   return (
     <div className="flex w-full h-full flex-col bg-[#fae5cdc7]">
       <TopBar />
+      {uiState.isSideBar && <SideBar />}
       <AppRoutes />
       <Footer />
     </div>

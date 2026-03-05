@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
-function TopBar({ dispatch }) {
+import {useUi} from "../UiContext/uiContext"
+function TopBar() {
+  const {dispatch: uiDispatch } = useUi() 
   return (
     <div className="flex flex-row justify-between h-34 w-full bg-gradient-to-b from-amber-900/90 to-amber-50/10 ">
       <ul className="flex flex-row justify-items-end p-2 gap-2">
@@ -9,14 +11,13 @@ function TopBar({ dispatch }) {
         </NavLink>
         <li
           className="btn-topbar"
-          onClick={() => dispatch({ type: "openModal" })}
+          onClick={() => uiDispatch({ type: "OPEN_MODAL" })}
         >
           Home
         </li>
         <NavLink to="/Product">
           <li
             className="btn-topbar"
-            onClick={() => dispatch({ type: "openSideBar" })}
           >
             prodotti
           </li>
@@ -24,7 +25,7 @@ function TopBar({ dispatch }) {
         <NavLink to="/chisiamo">
           <li className="btn-topbar">chi siamo?</li>
         </NavLink>
-        <li className="btn-topbar"> contatti</li>
+        <li onClick={() => uiDispatch({ type: "openSideBar" })} className="btn-topbar"> contatti</li>
       </ul>
       <ul className="flex flex-row p-2 gap-4 items-center justify-center text-center">
         <li className="btn-topbar">Registrati</li>

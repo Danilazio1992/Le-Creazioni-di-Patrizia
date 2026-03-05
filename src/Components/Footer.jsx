@@ -21,7 +21,7 @@ const OurBusiness = [
 ];
 
 export default function Footer() {
-  const { state: uiState, dispatch: uiDispatch } = useUi();
+  const { state: uiState} = useUi();
   return (
     <footer className="main flex flex-col h-full w-full justify-center font ">
       <div className="flex max-lg:flex-col flex-row p-4 h-fit w-full text-amber-950 bg-[#fff8f1] justify-around">
