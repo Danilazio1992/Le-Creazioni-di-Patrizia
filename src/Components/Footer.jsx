@@ -8,20 +8,24 @@ import {
   LiaWhatsapp,
 } from "react-icons/lia";
 import { TfiYoutube } from "react-icons/tfi";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useUi } from "../UiContext/uiContext";
 const OurBusiness = [
-  "Chi Siamo",
-  "Condizioni di Vendita",
-  "termini e condizioni d'uso",
-  "Diritto di Recesso",
-  "Spedizione e Pagamenti",
-  "Domande Frequenti (FAQ)",
-  "Contattaci",
+  { route: "/chisiamo", text: "Chi Siamo" },
+  { route: "/legal/condizioni-di-vendita", text: "Condizioni di Vendita" },
+  {
+    route: "/legal/termini-e-condizioni-d-uso",
+    text: "termini e condizioni d'uso",
+  },
+  { route: "/legal/diritto-di-recesso", text: "Diritto di Recesso" },
+  { route: "/legal/spedizioni-e-pagamenti", text: "Spedizioni e Pagamenti" },
+  { route: "/FAQ", text: "Domande Frequenti (FAQ)" },
+  { route: "/contatti", text: "Contattaci" },
 ];
 
 export default function Footer() {
-  const { state: uiState} = useUi();
+  const { state: uiState } = useUi();
   return (
     <footer className="main flex flex-col h-full w-full justify-center font ">
       <div className="flex max-lg:flex-col flex-row p-4 h-fit w-full text-amber-950 bg-[#fff8f1] justify-around">
@@ -39,9 +43,9 @@ export default function Footer() {
               <li className="flex items-center gap-1 group relative">
                 <LiaWhatsapp className=" text-amber-950" />
                 <a href="https://wa.me/393398089996">
-                <label className=" font-bold">whatsapp:</label>
-                +393398089996
-                <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all ease duration-1000 group-hover:w-[80%]"></span>
+                  <label className=" font-bold">whatsapp:</label>
+                  +393398089996
+                  <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all ease duration-1000 group-hover:w-[80%]"></span>
                 </a>
               </li>
               <li className="flex items-center gap-1 group relative">
@@ -79,9 +83,15 @@ export default function Footer() {
           </h1>
           <ul className="flex flex-col w-full max-lg:justify-center ">
             {OurBusiness.map((el, i) => (
-              <li key={i} className="p-1 flex max-lg:justify-center">
-                <p className="flex cursor-pointer hover:font-bold ">{el}</p>
-              </li>
+              <NavLink
+                to={`${el.route}`}
+                key={i}
+                className="p-1 flex max-lg:justify-center"
+              >
+                <p className="flex cursor-pointer hover:font-bold ">
+                  {el.text}
+                </p>
+              </NavLink>
             ))}
           </ul>
         </div>
