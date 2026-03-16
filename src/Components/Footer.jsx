@@ -34,16 +34,18 @@ export default function Footer() {
           <div className="flex flex-col p-2 h-fit gap-1.5">
             <h1 className=" text-xl pt-2 pb-2 font-extrabold">Contatti</h1>
             <ul className="flex flex-col gap-1">
-              <li className="flex items-center gap-1 h-full w-full group relative">
-                <LiaPhoneAltSolid className=" text-amber-950" />
-                <label className=" font-bold">Telefono:</label>
-                <a href="tel:+393398089996"> +393398089996</a>
+              <li className="flex items-center gap-1 h-full w-full group relative cursor-pointer">
+                <a className="flex items-center" href="tel:+393398089996">
+                  <LiaPhoneAltSolid className=" text-amber-950" />
+                  <label className="cursor-pointer font-bold">Telefono:</label>
+                  +393398089996
+                </a>
                 <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all duration-1000 group-hover:w-[80%]"></span>
               </li>
-              <li className="flex items-center gap-1 group relative">
+              <li className="flex items-center gap-1 group cursor-pointer relative">
                 <LiaWhatsapp className=" text-amber-950" />
                 <a href="https://wa.me/393398089996">
-                  <label className=" font-bold">whatsapp:</label>
+                  <label className="cursor-pointer font-bold">whatsapp:</label>
                   +393398089996
                   <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all ease duration-1000 group-hover:w-[80%]"></span>
                 </a>
@@ -53,10 +55,13 @@ export default function Footer() {
                 <label className=" font-bold">Dove siamo</label>
                 <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all duration-1000 group-hover:w-[80%]"></span>
               </li>
-              <li className="flex items-center gap-1 group relative">
-                <LiaAtSolid className=" text-amber-950" />
-                <label className=" font-bold">Email</label>
-                <a href="mailto:info@lecreazionidipatrizia.it">
+              <li className="cursor-pointer flex items-center gap-1 group relative">
+                <a
+                  className="flex items-center"
+                  href="mailto:info@lecreazionidipatrizia.it"
+                >
+                  <LiaAtSolid className=" text-amber-950" />
+                  <label className="cursor-pointer font-bold">Email:</label>
                   info@lecreazionidipatrizia.it
                 </a>
                 <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all duration-1000 group-hover:w-[80%]"></span>

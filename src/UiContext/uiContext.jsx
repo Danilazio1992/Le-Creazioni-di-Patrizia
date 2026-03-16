@@ -1,12 +1,16 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
+import { cities } from "../assets/cities";
 import { uiInitialState } from "./uiInitialState";
 import { uiReducer } from "./UIReducer";
 const uiContext = createContext(null);
 
 export function UiProvider({ children }) {
   const [state, dispatch] = useReducer(uiReducer, uiInitialState);
-
-  const value = { state, dispatch };
+  const [newData, setNewData] = useState(cities);
+  const handleRemove = (id) => {
+    setNewData((prevData) => prevData.filter((el) => el.id !== id));
+  };
+  const value = { state, dispatch, handleRemove, newData };
 
   return <uiContext.Provider value={value}>{children}</uiContext.Provider>;
 }
