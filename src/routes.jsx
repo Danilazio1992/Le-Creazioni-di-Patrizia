@@ -4,6 +4,7 @@ import Home from "./Screen/Home";
 import LegalMainPage from "./Screen/LegalMainPage";
 import LegalTemplate from "./Screen/LegalTemplate";
 import Login from "./Screen/Login";
+import ProductList from "./Screen/ProductList";
 import SingleProduct from "./Screen/SingleProduct";
 
 export const routes = [
@@ -17,7 +18,8 @@ export const routes = [
   },
   {
     path: "/product",
-    element: <SingleProduct />,
+    element: <ProductList />,
+    children: [{ path: ":id", element: <SingleProduct /> }],
   },
   {
     path: "/chisiamo",

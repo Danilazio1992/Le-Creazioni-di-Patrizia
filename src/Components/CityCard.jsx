@@ -1,11 +1,9 @@
-function CityCard({
-  city,
-  handleRemove,
-  hovered,
-  setHovered,
-  idHovered,
-  setIdHovered,
-}) {
+import { NavLink, useLocation } from "react-router-dom";
+import { useUi } from "../UiContext/uiContext";
+
+function CityCard({ city, idHovered, setIdHovered }) {
+  const { handleRemove } = useUi();
+  const location = useLocation();
   let modify = "H";
 
   let classe = [
@@ -15,17 +13,16 @@ function CityCard({
   ];
 
   const handleEnter = (e) => {
-    setHovered(true);
     setIdHovered(+e.currentTarget.id);
   };
   const handleLeave = () => {
-    setHovered(false);
     setIdHovered(-1);
   };
 
   return (
-    <div
-      id={city.id}
+    <NavLink
+      to={`${city.id}-${city.name}`}
+      id={`${city.id}`}
       className={`flex flex-wrap rounded-2xl min-w-[280px] w-[15%] shadow-lg shadow-amber-950 justify-center overflow-hidden bg-amber-950   ${idHovered === city.id ? classe[1] : idHovered !== -1 ? classe[0] : classe[2]}`}
       onMouseEnter={(e) => handleEnter(e)}
       onMouseLeave={() => handleLeave()}
@@ -40,7 +37,10 @@ function CityCard({
           <button className="flex justify-center p-2 bg-amber-500 min-w-8 w-full rounded-xl">
             {modify}
           </button>
-          <button className="btn-exit" onClick={() => handleRemove(city.id)}>
+          <button
+            className="btn-exit"
+            onClick={(e) => handleRemove(e, city.id)}
+          >
             X
           </button>
         </div>
@@ -58,7 +58,13 @@ function CityCard({
         </p>
         <p className="p-2 flex font-extrabold justify-center">{city.id}</p>
       </div>
-    </div>
+      <button
+        onClick={() => console.log(location.pathname.split("/"))}
+        className="flex p-2 rounded-md bg-amber-50 border border-amber-300 text-amber-950 cursor pointer hover:bg-amber-300"
+      >
+        logga location
+      </button>
+    </NavLink>
   );
 }
 

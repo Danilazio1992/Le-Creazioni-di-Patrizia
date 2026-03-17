@@ -7,10 +7,12 @@ const uiContext = createContext(null);
 export function UiProvider({ children }) {
   const [state, dispatch] = useReducer(uiReducer, uiInitialState);
   const [newData, setNewData] = useState(cities);
-  const handleRemove = (id) => {
+  const handleRemove = (e, id) => {
+    e.stopPropagation();
+    e.preventDefault();
     setNewData((prevData) => prevData.filter((el) => el.id !== id));
   };
-  const value = { state, dispatch, handleRemove, newData };
+  const value = { state, dispatch, handleRemove, newData, setNewData };
 
   return <uiContext.Provider value={value}>{children}</uiContext.Provider>;
 }

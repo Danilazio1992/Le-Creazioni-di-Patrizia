@@ -1,4 +1,12 @@
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import CityCard from "../Components/CityCard";
+import { useUi } from "../UiContext/uiContext";
+
 function ProductList() {
+  const { newData } = useUi();
+  const [idHovered, setIdHovered] = useState(-1);
+
   return (
     <div>
       <h2>ProductList</h2>
@@ -14,14 +22,12 @@ function ProductList() {
               <CityCard
                 city={city}
                 key={city.id}
-                handleRemove={handleRemove}
-                hovered={hovered}
-                setHovered={setHovered}
                 idHovered={idHovered}
                 setIdHovered={setIdHovered}
               />
             ))}
         </div>
+        <Outlet />
       </div>
     </div>
   );
