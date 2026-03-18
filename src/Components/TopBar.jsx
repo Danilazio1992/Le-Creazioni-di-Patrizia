@@ -9,21 +9,22 @@ function TopBar() {
         <NavLink to="/">
           <img className="h-full flex" src={logo} alt="" />
         </NavLink>
+        <NavLink className="btn-topbar" to="/">
         <li
-          className="btn-topbar"
-          onClick={() => uiDispatch({ type: "OPEN_MODAL" })}
-        >
+          
+          >
           Home
         </li>
-        <NavLink to="/Product">
+          </NavLink>
+        <NavLink className="btn-topbar" to="/Product">
           <li
-            className="btn-topbar"
+            
           >
             prodotti
           </li>
         </NavLink>
-        <NavLink to="/chisiamo">
-          <li className="btn-topbar">chi siamo?</li>
+        <NavLink className="btn-topbar" to="/chisiamo">
+          <li >chi siamo?</li>
         </NavLink>
         <li onClick={() => uiDispatch({ type: "openSideBar" })} className="btn-topbar"> contatti</li>
       </ul>
