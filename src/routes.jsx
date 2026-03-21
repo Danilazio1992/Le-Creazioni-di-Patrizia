@@ -1,3 +1,4 @@
+import CartTemplate from "./Screen/CartTemplate";
 import ChiSiamo from "./Screen/ChiSiamo";
 import ErrorPage from "./Screen/ErrorPage";
 import Home from "./Screen/Home";
@@ -28,6 +29,10 @@ export const routes = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/cart",
+    element: <CartTemplate />,
   },
   {
     path: "/legal",

@@ -8,13 +8,14 @@ function ProductList() {
   const [idHovered, setIdHovered] = useState(-1);
 
   return (
-    <div>
-      <h2>ProductList</h2>
-      <div>
+    <div className="flex flex-col justify-center text-amber-900">
+      <h2 className="flex justify-center">ProductList</h2>
+      <ul></ul>
+      <div className="flex justify-center">
         <h3>category container</h3>
       </div>
-      <div>
-        <h3>product filtered container</h3>
+      <h3 className="flex justify-center">product filtered container</h3>
+      <div className=" flex flex-col">
         <div className="flex flex-wrap gap-4 p-4 w-full justify-center ">
           {newData
             .filter((el, i) => i < 10)
