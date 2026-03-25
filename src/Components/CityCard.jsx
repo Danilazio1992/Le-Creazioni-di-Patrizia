@@ -1,8 +1,10 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useUi } from "../UiContext/uiContext";
+import { useCart } from "../cartContext/cartContex";
 
 function CityCard({ city, idHovered, setIdHovered }) {
   const { handleRemove } = useUi();
+  const { state: cartState, dispatch: cartDispatch } = useCart();
   const location = useLocation();
   let modify = "H";
 
@@ -59,7 +61,7 @@ function CityCard({ city, idHovered, setIdHovered }) {
         <p className="p-2 flex font-extrabold justify-center">{city.id}</p>
       </div>
       <button
-        onClick={() => console.log(location.pathname.split("/"))}
+        onClick={() => cartDispatch({ type: "ADD_TO_CART", payload: city })}
         className="flex p-2 rounded-md bg-amber-50 border border-amber-300 text-amber-950 cursor pointer hover:bg-amber-300"
       >
         logga location
