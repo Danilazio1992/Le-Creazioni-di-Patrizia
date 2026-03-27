@@ -20,6 +20,16 @@ function CityCard({ city, idHovered, setIdHovered }) {
   const handleLeave = () => {
     setIdHovered(-1);
   };
+  const addToCart = (e) =>{
+    const exist = cartState.products.find(el => el.id === city.id);
+    if(exist && exist.qty === city.qtyInStock){
+      alert("Quantità non disponibile in magazzino")
+    }
+    e.preventDefault()
+    e.stopPropagation()
+    
+    cartDispatch({ type: "ADD_TO_CART", payload: city })
+  }
 
   return (
     <NavLink
@@ -61,7 +71,7 @@ function CityCard({ city, idHovered, setIdHovered }) {
         <p className="p-2 flex font-extrabold justify-center">{city.id}</p>
       </div>
       <button
-        onClick={() => cartDispatch({ type: "ADD_TO_CART", payload: city })}
+        onClick={(e) => addToCart(e)}
         className="flex p-2 rounded-md bg-amber-50 border border-amber-300 text-amber-950 cursor pointer hover:bg-amber-300"
       >
         logga location
