@@ -18,7 +18,7 @@ export function UiProvider({ children }) {
 }
 
 export const useUi = () => {
-  const context = useContext(uiContext); // gli context è legato
+  const context = useContext(uiContext); // gli lego il context
   if (!context)
     throw new Error("useUi va utilizzato dentro al contesto uiProvider");
   return context;

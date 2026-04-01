@@ -1,6 +1,43 @@
 import { useEffect, useState } from "react";
 import { TiMinus, TiPlus, TiTrash } from "react-icons/ti";
+import { useUi } from "../UiContext/uiContext";
+import { useCart } from "../cartContext/cartContex";
+
 function CartTemplate() {
+  const { newData } = useUi();
+  const { state: cartState, dispatch: cartDispatch } = useCart();
+  const map = new Map(newData.map((p) => [p.id, p]));
+
+  const handlePrint = () => {
+    if (!cartState.products?.length) {
+      console.log("non ci sono prodotti nel carrello");
+      return;
+    } else {
+      const result = cartState.products.map((prod) =>
+        newData.find((el) => prod.id === el.id),
+      );
+      console.log(cartState.products, "sono i prodotti nel carrello");
+      console.log(result);
+      return;
+    }
+  };
+  // prodotti aggiunti nel carrello creo mappa cosi è piu veloce meno check ogni volta faccio il get tramite l'id fornito
+  // poi una guard in caso valore falsy evito l'errore, e poi spreddo il prodotto trovato e ci aggiungo cartQTY
+  // e poi metto un filter con valore Boolean cosi ritorna solo i valori thruty
+  const cartFull = cartState.products
+    .map((item) => {
+      const product = map.get(item.id);
+      if (!product) return null;
+
+      return {
+        ...product,
+        cartQTY: item.qty,
+      };
+    })
+    .filter(Boolean);
+
+  /* cartFull.map(prod => <CartProduct product={prod}>) */
+
   let productPrice = 20.19;
   const [qty, setQty] = useState(1);
   const [total, setTotal] = useState(qty * productPrice);
@@ -52,6 +89,12 @@ function CartTemplate() {
           <TiTrash className="flex text-2xl w-1/5 justify-center" />
         </div>
       </section>
+      <button
+        onClick={() => handlePrint()}
+        className="flex justify-center text-center p-4 bg-amber-200 text-amber-900 rounded-lg cursor-pointer"
+      >
+        stamp
+      </button>
     </div>
   );
 }

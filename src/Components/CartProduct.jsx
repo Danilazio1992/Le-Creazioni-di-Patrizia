@@ -1,6 +1,4 @@
-function CartProduct() {
-  let productPrice = 20.19;
-  const [qty, setQty] = useState(1);
+function CartProduct({ qty, id }) {
   const [total, setTotal] = useState(qty * productPrice);
   const handleAddQty = () => {
     setQty((prev) => prev + 1);
@@ -13,7 +11,7 @@ function CartProduct() {
     }
   };
   useEffect(() => {
-    setTotal(qty * productPrice);
+    setTotal(qty * price);
   }, [qty]);
 
   return (
@@ -22,7 +20,7 @@ function CartProduct() {
         <div className="flex w-28 h-28 aspect-square bg-amber-950"></div>
       </div>
       <div className="flex w-1/5 justify-center"> descrizione prodotto </div>
-      <div className="flex w-1/5 justify-center"> {productPrice}€ </div>
+      <div className="flex w-1/5 justify-center"> {price}€ </div>
       <div className="flex w-1/5 items-center gap-2 justify-center">
         <TiPlus
           onClick={() => setQty((prev) => prev + 1)}
