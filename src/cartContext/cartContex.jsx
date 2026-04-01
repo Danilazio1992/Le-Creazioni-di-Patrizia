@@ -6,6 +6,12 @@ const cartContext = createContext(null);
 
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, cartInitialState);
+ /*  const productMap = new Map()
+  const cartTotal = []
+  const cartCount = state.products.reduce((acc,prod) => {
+    const product= map.get(prod.id)
+    return 
+  } ) */
   const value = { state, dispatch };
   return <cartContext.Provider value={value}>{children}</cartContext.Provider>;
 }

@@ -5,7 +5,7 @@ import { useCart } from "../cartContext/cartContex";
 
 function CartTemplate() {
   const { newData } = useUi();
-  const { state: cartState, dispatch: cartDispatch } = useCart();
+  const { state: cartState} = useCart();
   const map = new Map(newData.map((p) => [p.id, p]));
 
   const handlePrint = () => {
@@ -36,14 +36,11 @@ function CartTemplate() {
     })
     .filter(Boolean);
 
-  /* cartFull.map(prod => <CartProduct product={prod}>) */
+  /* cartFull.map(prod => <CartProduct key={product.id} product={prod}>) */
 
   let productPrice = 20.19;
   const [qty, setQty] = useState(1);
   const [total, setTotal] = useState(qty * productPrice);
-  const handleAddQty = () => {
-    setQty((prev) => prev + 1);
-  };
   const handleLessQty = () => {
     if (qty <= 1) {
       return;
