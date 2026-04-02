@@ -65,7 +65,7 @@ function CartTemplate() {
       </button>
       <div className="flex p-2 text-2xl font-extrabold bg-amber-100 text-amber-950 rounded-md flex-col justify-center items-center text-center">
         <h2>Totale</h2>
-        <p>{cartTotal}€</p>
+        <p>{cartTotal.toFixed(2)}€</p>
       </div>
     </div>
   );

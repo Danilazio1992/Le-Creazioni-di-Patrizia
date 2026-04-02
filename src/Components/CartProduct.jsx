@@ -12,7 +12,7 @@ function CartProduct({ product: { id, price, description, cartQty } }) {
         <div className="flex w-28 h-28 aspect-square bg-amber-950"></div>
       </div>
       <div className="flex w-1/5 justify-center"> {description} </div>
-      <div className="flex w-1/5 justify-center"> {price}€ </div>
+      <div className="flex w-1/5 justify-center"> {price.toFixed(2)}€ </div>
       <div className="flex w-1/5 items-center gap-2 justify-center">
         <TiPlus
           onClick={() => cartDispatch({ type: "INCREMENT_QTY", payload: {id} })}
