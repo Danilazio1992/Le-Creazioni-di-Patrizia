@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-
 function LegalTemplate() {
   const location = useLocation();
   return (

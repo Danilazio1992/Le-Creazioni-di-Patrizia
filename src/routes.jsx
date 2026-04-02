@@ -1,3 +1,4 @@
+import DirittoDiRecesso from "./Components/DirittoDiRecesso";
 import CartTemplate from "./Screen/CartTemplate";
 import ChiSiamo from "./Screen/ChiSiamo";
 import ErrorPage from "./Screen/ErrorPage";
@@ -40,7 +41,7 @@ export const routes = [
     children: [
       {
         path: "diritto-di-recesso",
-        element: <LegalTemplate />,
+        element: <DirittoDiRecesso />,
       },
       {
         path: "spedizioni-e-pagamenti",

@@ -45,8 +45,7 @@ function ChiSiamo() {
   ];
 
   return (
-    <main className="flex flex-col w-full min-h-screen items-center gap-16 bg-[#fff8f1] text-amber-950 py-16">
-      {/* HERO */}
+    <main className="flex flex-col w-full min-h-screen items-center gap-16 bg-[#fff0e1] text-amber-950 py-16">
       <section className="flex flex-col lg:flex-row items-center gap-10 px-6 w-full max-w-6xl">
         <div className="flex flex-col gap-6 max-w-xl">
           <span className="bg-[#fae5cdc7] px-4 py-1 rounded-full text-sm w-fit">
