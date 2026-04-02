@@ -57,8 +57,6 @@ function DirittoDiRecesso() {
           </li>
         </ul>
       </section>
-
-      {/* PROCEDURA */}
       <section className="flex flex-col w-full max-w-3xl gap-6">
         <h2 className="text-xl font-semibold text-center">
           Come esercitare il diritto di recesso
