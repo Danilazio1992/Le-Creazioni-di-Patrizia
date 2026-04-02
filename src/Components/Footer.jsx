@@ -32,7 +32,9 @@ export default function Footer() {
         <div className="primary flex h-full items-center max-lg:flex-col  ">
           <img className="flex w-76 h-fit" src={logo} alt="" />
           <div className="flex flex-col p-2 h-fit gap-1.5">
-            <h1 className=" text-xl pt-2 pb-2 font-extrabold">Contatti</h1>
+            <h1 className=" text-2xl pt-2 pb-2 font-extrabold max-lg:text-center">
+              Contatti
+            </h1>
             <ul className="flex flex-col gap-1">
               <li className="flex items-center gap-1 h-full w-full group relative cursor-pointer">
                 <a className="flex items-center" href="tel:+393398089996">
@@ -67,10 +69,10 @@ export default function Footer() {
                 <span className="absolute left-0 bottom-0 block h-0.5 w-[15%] bg-amber-950 transition-all duration-1000 group-hover:w-[80%]"></span>
               </li>
             </ul>
-            <h1 className=" text-xl pt-2 font-extrabold">
+            <h1 className=" text-xl pt-2 font-extrabold max-lg:text-center">
               Seguici sui nostri Social
             </h1>
-            <section className=" flex flex-row text-4xl gap-2 pt-2 ">
+            <section className=" flex flex-row text-4xl gap-2 pt-2 max-lg:justify-center">
               <LiaFacebookSquare className="cursor-pointer text-amber-950 font-extrabold  hover:text-amber-50 hover:bg-amber-950 rounded-sm" />
               <LiaInstagram className="cursor-pointer text-amber-950 font-extrabold  hover:text-amber-50 hover:bg-amber-950 rounded-sm" />
               <LiaWhatsapp className="cursor-pointer text-amber-950 font-extrabold  hover:text-amber-50 hover:bg-amber-950 rounded-sm" />

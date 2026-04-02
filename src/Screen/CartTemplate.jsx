@@ -36,10 +36,9 @@ function CartTemplate() {
     .filter(Boolean);
 
   const cartTotal = cartFull.reduce((acc, product) => {
-  return acc + product.price * product.cartQty;
-}, 0);
+    return acc + product.price * product.cartQty;
+  }, 0);
 
-  
   return (
     <div className=" flex flex-col w-screen min-h-96 items-center p-2">
       <nav className="flex flex-col w-[85%] h-fit p-2">
@@ -52,11 +51,14 @@ function CartTemplate() {
         </ul>
         <hr className="flex border border-amber-900 w-full"></hr>
       </nav>
-        {cartFull.map((prod) => (
-      <section className="flex flex-row p-2 bg-amber-100/50 w-[85%] h-40 gap-2 items-center justify-around text-amber-950">
+      {cartFull.map((prod, i) => (
+        <section
+          key={i}
+          className="flex flex-row p-2 bg-amber-100/50 w-[85%] h-40 gap-2 items-center justify-around text-amber-950"
+        >
           <CartProduct key={prod.id} product={prod} />
-      </section>
-        ))}
+        </section>
+      ))}
       <button
         onClick={() => handlePrint()}
         className="flex justify-center text-center p-4 bg-amber-200 text-amber-900 rounded-lg cursor-pointer"
