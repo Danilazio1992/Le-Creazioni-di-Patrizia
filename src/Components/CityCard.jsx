@@ -1,11 +1,11 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { useUi } from "../UiContext/uiContext";
 import { useCart } from "../cartContext/cartContex";
 
 function CityCard({ city, idHovered, setIdHovered }) {
   const { handleRemove } = useUi();
   const { state: cartState, dispatch: cartDispatch } = useCart();
-  //const location = useLocation();
+
   let modify = "H";
 
   let classe = [

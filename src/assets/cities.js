@@ -5,9 +5,9 @@ export const cities = [
     imgUrl:
       "https://media.istockphoto.com/id/539115110/it/foto/colosseo-di-roma-e-sole-mattutino-italia.jpg?s=612x612&w=0&k=20&c=ngbBMGVEkJxHsnt4SN7ZuncEnRenq2tFI8V0-zCg4pw=",
     description:
-      "Capitale d'Italia,Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia,  famosa per il Colosseo, il Vaticano e la sua storia millenaria.",
+      "Capitale d'Italia, famosa per il Colosseo, il Vaticano e la sua storia millenaria.",
     isVisited: true,
-    price: 11,
+    price: 11.00,
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const cities = [
     description:
       "Culla del Rinascimento, nota per la Cupola del Brunelleschi e gli Uffizi.",
     isVisited: false,
-    price: 9,
+    price: 9.00,
   },
   {
     id: 3,
