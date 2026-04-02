@@ -108,7 +108,7 @@ export default function Footer() {
           </h1>
         </div>
       </div>
-      <div className="flex justify-center items-center h-16 text-amber-950">
+      <div className="flex justify-center items-center h-[40px] text-amber-950">
         <p>{`© Copyright 2025 – “Le Creazioni di Patrizia” | P.IVA IT 00000000000
 Sito web gestito da TNT TECH SPA`}</p>
       </div>
