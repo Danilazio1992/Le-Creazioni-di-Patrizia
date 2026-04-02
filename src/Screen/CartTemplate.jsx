@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { TiMinus, TiPlus, TiTrash } from "react-icons/ti";
-import { useUi } from "../UiContext/uiContext";
 import { useCart } from "../cartContext/cartContex";
+import CartProduct from "../Components/CartProduct";
+import { useUi } from "../UiContext/uiContext";
 
 function CartTemplate() {
   const { newData } = useUi();
-  const { state: cartState} = useCart();
+  const { state: cartState } = useCart();
   const map = new Map(newData.map((p) => [p.id, p]));
 
   const handlePrint = () => {
@@ -31,7 +31,7 @@ function CartTemplate() {
 
       return {
         ...product,
-        cartQTY: item.qty,
+        cartQty: item.qty,
       };
     })
     .filter(Boolean);
@@ -65,7 +65,11 @@ function CartTemplate() {
         <hr className="flex border border-amber-900 w-full"></hr>
       </nav>
       <section className="flex flex-row p-2 bg-amber-100/50 w-[85%] h-40 gap-2 items-center justify-around text-amber-950">
-        <div className="flex w-1/5 justify-center">
+        {cartFull.map((prod) => (
+          <CartProduct key={prod.id} product={prod} />
+        ))}
+
+        {/* <div className="flex w-1/5 justify-center">
           <div className="flex w-28 h-28 aspect-square bg-amber-950"></div>
         </div>
         <div className="flex w-1/5 justify-center"> descrizione prodotto </div>
@@ -84,7 +88,7 @@ function CartTemplate() {
         <div className="flex w-1/5 justify-center">
           {total.toFixed(2)}€{" "}
           <TiTrash className="flex text-2xl w-1/5 justify-center" />
-        </div>
+        </div> */}
       </section>
       <button
         onClick={() => handlePrint()}

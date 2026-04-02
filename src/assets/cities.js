@@ -7,6 +7,7 @@ export const cities = [
     description:
       "Capitale d'Italia,Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia, Capitale d'Italia,  famosa per il Colosseo, il Vaticano e la sua storia millenaria.",
     isVisited: true,
+    price: 11,
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const cities = [
     description:
       "Culla del Rinascimento, nota per la Cupola del Brunelleschi e gli Uffizi.",
     isVisited: false,
+    price: 9,
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const cities = [
     description:
       "Città unica al mondo costruita su canali, famosa per Piazza San Marco e il Carnevale.",
     isVisited: true,
+    price: 2.75,
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const cities = [
     description:
       "Capitale della moda e del design, con il celebre Duomo e il Castello Sforzesco.",
     isVisited: false,
+    price: 7.49,
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const cities = [
     description:
       "Famosa per la pizza, il Vesuvio e la vista sul Golfo di Napoli.",
     isVisited: true,
+    price: 4.49,
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ export const cities = [
     description:
       "Antica capitale d'Italia, celebre per la Mole Antonelliana e la storia sabauda.",
     isVisited: false,
+    price: 6.49,
   },
   {
     id: 7,
@@ -60,6 +66,7 @@ export const cities = [
       "https://upload.wikimedia.org/wikipedia/commons/5/5d/Bologna_Two_Towers.jpg",
     description: "Nota per le due torri, i portici e la cucina tradizionale.",
     isVisited: false,
+    price: 9.99,
   },
   {
     id: 8,
@@ -69,6 +76,7 @@ export const cities = [
     description:
       "Città romantica famosa per l’Arena e la leggenda di Romeo e Giulietta.",
     isVisited: true,
+    price: 10.25,
   },
   {
     id: 9,
@@ -78,6 +86,7 @@ export const cities = [
     description:
       "Importante porto storico, con caruggi caratteristici e il famoso Acquario.",
     isVisited: false,
+    price: 3.49,
   },
   {
     id: 10,
@@ -87,6 +96,7 @@ export const cities = [
     description:
       "Città ricca di storia e cultura, con influenze arabe e normanne.",
     isVisited: true,
+    price: 6.99,
   },
 ];
 

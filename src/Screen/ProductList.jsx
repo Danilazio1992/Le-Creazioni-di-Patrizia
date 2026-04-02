@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import CityCard from "../Components/CityCard";
 import { useUi } from "../UiContext/uiContext";
-
 function ProductList() {
   const { newData } = useUi();
   const [idHovered, setIdHovered] = useState(-1);
