@@ -4,7 +4,7 @@ import { useUi } from "../UiContext/uiContext";
 
 function CartTemplate() {
   const { newData } = useUi();
-  const { state: cartState } = useCart();
+  const { state: cartState, itemTotalCartQty } = useCart();
   const map = new Map(newData.map((p) => [p.id, p]));
 
   const handlePrint = () => {
@@ -17,6 +17,7 @@ function CartTemplate() {
       );
       console.log(cartState.products, "sono i prodotti nel carrello");
       console.log(result);
+      console.log(`prodotti nel carrello: ${itemTotalCartQty}`)
       return;
     }
   };
@@ -38,7 +39,7 @@ function CartTemplate() {
   const cartTotal = cartFull.reduce((acc, product) => {
     return acc + product.price * product.cartQty;
   }, 0);
-
+  
   return (
     <div className=" flex flex-col w-screen min-h-96 items-center p-2">
       <nav className="flex flex-col w-[85%] h-fit p-2">
@@ -68,6 +69,7 @@ function CartTemplate() {
       <div className="flex p-2 text-2xl font-extrabold bg-amber-100 text-amber-950 rounded-md flex-col justify-center items-center text-center">
         <h2>Totale</h2>
         <p>{cartTotal.toFixed(2)}€</p>
+        <p>{itemTotalCartQty} pcs</p>
       </div>
     </div>
   );
