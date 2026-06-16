@@ -39,10 +39,10 @@ function Login() {
       if (user.password === login.password) {
         authDispatch({ type: "LOGIN_SUCCESS", payload: { user } });
         navigate("/");
-        setLogin({ email: "", password: "" });
+        setLogin({ email: "", password: "" }); //serve a pulire i campi dopo
       } else {
         alert("Password Errata");
-        setLogin({ ...login, password: "" });
+        setLogin({ ...login, password: "" }); //cancella la password a livello antihacking è sbagliato far capire che potrebbero aver azzeccato l'email
       }
     } else {
       alert("Email non Registrata");
