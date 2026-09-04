@@ -41,11 +41,11 @@ function Login() {
         navigate("/");
         setLogin({ email: "", password: "" }); //serve a pulire i campi dopo
       } else {
-        alert("Password Errata");
+        alert("Email o Password Errate");
         setLogin({ ...login, password: "" }); //cancella la password a livello antihacking è sbagliato far capire che potrebbero aver azzeccato l'email
       }
     } else {
-      alert("Email non Registrata");
+      alert("Email o Password Errate");
       setLogin({ email: "", password: "" });
     }
   };

@@ -1,26 +1,37 @@
-
 import { TiMinus, TiPlus, TiTrash } from "react-icons/ti";
 import { useCart } from "../cartContext/cartContex";
 
-function CartProduct({ product: { id, price, description, cartQty } }) {
+function CartProduct({
+  product: { id, name, imgUrl, price, description, cartQty },
+}) {
   const { dispatch: cartDispatch } = useCart();
-  const total = cartQty * price
+  const total = cartQty * price;
 
   return (
     <>
       <div className="flex w-1/5 justify-center">
-        <div className="flex w-28 h-28 aspect-square bg-amber-950"></div>
+        <div className="flex w-28 h-28 aspect-square bg-amber-950 rounded-4xl shadow-md border-b-2 border-e">
+          <img
+            className="flex w-full h-full rounded-4xl"
+            src={imgUrl}
+            alt={`${name} photo`}
+          ></img>
+        </div>
       </div>
       <div className="flex w-1/5 justify-center"> {description} </div>
       <div className="flex w-1/5 justify-center"> {price.toFixed(2)}€ </div>
       <div className="flex w-1/5 items-center gap-2 justify-center">
         <TiPlus
-          onClick={() => cartDispatch({ type: "INCREMENT_QTY", payload: {id} })}
+          onClick={() =>
+            cartDispatch({ type: "INCREMENT_QTY", payload: { id } })
+          }
           className=" text-green-700 cursor-pointer hover:bg-amber-950/10 rounded-2xl transition-transform hover:translate-y-[-0.5px]"
         />
         {cartQty}
         <TiMinus
-          onClick={() => cartDispatch({ type: "DECREMENT_QTY", payload: {id} })}
+          onClick={() =>
+            cartDispatch({ type: "DECREMENT_QTY", payload: { id } })
+          }
           className=" text-red-900 cursor-pointer hover:bg-amber-950/10 rounded-2xl transition-transform hover:translate-y-[-0.5px]"
         />
       </div>

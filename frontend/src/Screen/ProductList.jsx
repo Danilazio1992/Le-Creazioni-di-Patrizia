@@ -4,7 +4,7 @@ import CityCard from "../Components/CityCard";
 import { useUi } from "../UiContext/uiContext";
 function ProductList() {
   const { newData } = useUi();
-  const [idHovered, setIdHovered] = useState(-1);
+  const [idHovered, setIdHovered] = useState(-1); //state condiviso tra tutti i componet citycard
 
   return (
     <div className="flex flex-col justify-center text-amber-900">
