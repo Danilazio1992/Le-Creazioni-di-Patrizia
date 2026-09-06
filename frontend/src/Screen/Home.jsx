@@ -9,7 +9,6 @@ import {
   LuSparkles,
 } from "react-icons/lu";
 import { NavLink } from "react-router-dom";
-import Modal from "../Components/Modal";
 import { useUi } from "../UiContext/uiContext";
 
 const highlights = [
@@ -58,8 +57,6 @@ function Home() {
 
   return (
     <main className="relative flex w-full flex-col items-center overflow-hidden bg-[#fae5cdc7] text-amber-950">
-      {uiState.isModal && <Modal />}
-
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="artisan-orb artisan-orb-one" />
         <div className="artisan-orb artisan-orb-two" />

@@ -5,8 +5,8 @@ export function uiReducer(state, action) {
       return { ...state, isModal: true };
     case "closeModal":
       return { ...state, isModal: false, modalContent: null };
-    case "spot":
-      return { ...state, isModal: true, modalContent: "Spot" };
+    case "SPOT":
+      return { ...state, isModal: true, modalContent: "SPOT" };
     case "openSideBar":
       return { ...state, isSideBar: true };
     case "closeSideBar":
