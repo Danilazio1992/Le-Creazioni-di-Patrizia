@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import { useState } from 'react';
 
 function Signin() {
     const [user, setUser] = useState({
@@ -31,13 +30,19 @@ function Signin() {
             Signin
         </title>
         <form className='flex w-full h-full p-2'>
-            <ul className='flex w-full h-full p-2'>
-                <li className='flex flex-row text-amber-900 items-center gap-2'>
+            <ul className='flex flex-col w-full h-full gap-2 p-2'>
+                <li className='flex flex-row text-amber-900 items-center gap-2 font-extrabold'>
                     <p>Nome:</p>
-            <input type="text" name="nome" id="nome" onChange={(e) => handleChange(e)} value={user.name} placeholder='Es: Daniele' className='p-1 text-center rounded-2xl bg-amber-300'/>
-
+                    <input type="text" name="nome" id="nome" onChange={(e) => handleChange(e)} value={user.name} placeholder='Es: Mario' className=' text-center rounded-lg bg-amber-300'/>
+                </li >
+                <li className='flex flex-row text-amber-900 items-center gap-2 font-extrabold'>
+                    <p>Cognome:</p>
+                    <input type="text" name="cognome" id="cognome" onChange={(e) => handleChange(e)} value={user.cognome} placeholder='Es: Rossi' className=' text-center rounded-lg bg-amber-300'/>
                 </li>
-
+                <li className='flex flex-row text-amber-900 items-center gap-2 font-extrabold'>
+                    <p>Data di Nascita:</p>
+                    <input type="date" name="birthday" id="birthday" onChange={(e) => handleChange(e)} value={user.birthday}   className="bg-amber-50/50 rounded-lg w-40 text-amber-950 text-center [&::-webkit-datetime-edit]:flex [&::-webkit-datetime-edit]:justify-center"/>
+                </li>
             </ul>
         </form>
     </div>
