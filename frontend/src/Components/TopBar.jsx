@@ -9,34 +9,50 @@ function TopBar() {
   const { itemTotalCartQty } = useCart();
   return (
     <div className="flex flex-row justify-between h-34 w-full bg-gradient-to-b from-amber-900/90 to-amber-50/10 ">
-      <ul className="flex flex-row justify-items-end p-2 gap-2">
+      <ul className="flex flex-row p-2 gap-2 justify-centers text-center">
+        <li>
         <NavLink to="/">
           <img className="h-full flex" src={logo} alt="" />
         </NavLink>
-        <NavLink className="btn-topbar" to="/">
-          <li>Home</li>
-        </NavLink>
+        </li>
+          <li className="flex items-center">
+            <NavLink className="btn-topbar" to="/">
+              Home
+            </NavLink>
+            </li>
+          <li className="flex items-center">
         <NavLink className="btn-topbar" to="/Product">
-          <li>prodotti</li>
+            prodotti
         </NavLink>
-        <NavLink className="btn-topbar" to="/chisiamo">
-          <li>chi siamo?</li>
-        </NavLink>
-        <li
-          onClick={() => uiDispatch({ type: "openSideBar" })}
-          className="btn-topbar"
-        >
-          {" "}
+            </li>
+          <li className="flex items-center">
+            <NavLink className="btn-topbar" to="/chisiamo">
+              chi siamo?
+            </NavLink>
+          </li>
+        <li className="flex items-center">
+          <div onClick={() => uiDispatch({ type: "openSideBar" })}
+          className="btn-topbar">
           contatti
+          </div>
+        </li>
+        <li className="flex items-center">
+          <div onClick={() => uiDispatch({ type: "SIGNIN" })}
+          className="btn-topbar">
+          PROVA
+          </div>
+          
         </li>
       </ul>
       <ul className="flex flex-row p-2 gap-4 items-center justify-center text-center">
         <li className="btn-topbar" onClick={() => uiDispatch({ type: "SPOT" })}>
           Registrati
         </li>
-        <NavLink to="/Login">
-          <li className="btn-topbar">Accedi</li>
-        </NavLink>
+        <li className="btn-topbar">
+          <NavLink to="/Login">
+            Accedi
+          </NavLink>
+        </li>
         <NavLink className="flex" to="/cart">
           <div className="flex relative group">
             <IoMdCart className=" hover:text-amber-950 text-2xl" />

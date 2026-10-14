@@ -1,3 +1,4 @@
+import Signin from "../Screen/Signin";
 import { useUi } from "../UiContext/uiContext";
 import CreateCardForm from "./CreateCardForm";
 function Modal() {
@@ -24,7 +25,7 @@ function Modal() {
         </button>
         {uiState.modalContent === "Spot" ? (
           <div className="bg-red-600 w-[80%] h-[80%]">porco dio</div>
-        ) : (
+        ) : uiState.modalContent === "SIGNIN" ? (<Signin />): (
           <CreateCardForm />
         )}
       </div>
