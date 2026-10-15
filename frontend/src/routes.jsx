@@ -1,4 +1,5 @@
 import DirittoDiRecesso from "./Components/DirittoDiRecesso";
+import Account from "./Screen/Account";
 import CartTemplate from "./Screen/CartTemplate";
 import ChiSiamo from "./Screen/ChiSiamo";
 import CondizioniVendita from "./Screen/CondizioniVendita";
@@ -20,6 +21,10 @@ export const routes = [
   {
     path: "*",
     element: <ErrorPage />,
+  },
+  {
+    path: "/account",
+    element: <Account />,
   },
   {
     path: "/product",

@@ -11,37 +11,40 @@ function TopBar() {
     <div className="flex flex-row justify-between h-34 w-full bg-gradient-to-b from-amber-900/90 to-amber-50/10 ">
       <ul className="flex flex-row p-2 gap-2 justify-centers text-center">
         <li>
-        <NavLink to="/">
-          <img className="h-full flex" src={logo} alt="" />
-        </NavLink>
+          <NavLink to="/">
+            <img className="h-full flex" src={logo} alt="" />
+          </NavLink>
         </li>
-          <li className="flex items-center">
-            <NavLink className="btn-topbar" to="/">
-              Home
-            </NavLink>
-            </li>
-          <li className="flex items-center">
-        <NavLink className="btn-topbar" to="/Product">
+        <li className="flex items-center">
+          <NavLink className="btn-topbar" to="/">
+            Home
+          </NavLink>
+        </li>
+        <li className="flex items-center">
+          <NavLink className="btn-topbar" to="/Product">
             prodotti
-        </NavLink>
-            </li>
-          <li className="flex items-center">
-            <NavLink className="btn-topbar" to="/chisiamo">
-              chi siamo?
-            </NavLink>
-          </li>
+          </NavLink>
+        </li>
         <li className="flex items-center">
-          <div onClick={() => uiDispatch({ type: "openSideBar" })}
-          className="btn-topbar">
-          contatti
+          <NavLink className="btn-topbar" to="/chisiamo">
+            chi siamo?
+          </NavLink>
+        </li>
+        <li className="flex items-center">
+          <div
+            onClick={() => uiDispatch({ type: "openSideBar" })}
+            className="btn-topbar"
+          >
+            contatti
           </div>
         </li>
         <li className="flex items-center">
-          <div onClick={() => uiDispatch({ type: "SIGNIN" })}
-          className="btn-topbar">
-          PROVA
-          </div>
-          
+          <NavLink /* onClick={() => uiDispatch({ type: "SIGNIN" })} */
+            className="btn-topbar"
+            to="/account"
+          >
+            PROVA
+          </NavLink>
         </li>
       </ul>
       <ul className="flex flex-row p-2 gap-4 items-center justify-center text-center">
@@ -49,9 +52,7 @@ function TopBar() {
           Registrati
         </li>
         <li className="btn-topbar">
-          <NavLink to="/Login">
-            Accedi
-          </NavLink>
+          <NavLink to="/Login">Accedi</NavLink>
         </li>
         <NavLink className="flex" to="/cart">
           <div className="flex relative group">
