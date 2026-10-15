@@ -15,9 +15,12 @@ function Signin() {
         nome_visualizzato:"",
         password:"",
         indirizzo_spedizione:true,
+        altri_indirizzi:[],
         preferenze:[],
     })
     const handleChange = (e) =>{
+        const {name, value}= e.target
+        setUser(prev => ({...prev, [name]: value}))
         return
     }
     const handleSubmit = (e) =>{
@@ -44,6 +47,7 @@ function Signin() {
                     <input type="date" name="birthday" id="birthday" onChange={(e) => handleChange(e)} value={user.birthday}   className="bg-amber-50/50 rounded-lg w-40 text-amber-950 text-center [&::-webkit-datetime-edit]:flex [&::-webkit-datetime-edit]:justify-center"/>
                 </li>
             </ul>
+            <button type="submit" onClick={(e)=> { e.preventDefault(), console.log(user)}} className='flex w-fit h-fit bg-amber-600 p-2 rounded-lg hover:bg-amber-300 hover:shadow-lg hover:shadow-amber-900'>stamp</button>
         </form>
     </div>
   )
