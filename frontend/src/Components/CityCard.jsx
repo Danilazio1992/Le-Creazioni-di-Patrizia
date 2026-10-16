@@ -1,4 +1,4 @@
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useUi } from "../UiContext/uiContext";
 import { useCart } from "../cartContext/cartContex";
 
@@ -20,20 +20,20 @@ function CityCard({ city, idHovered, setIdHovered }) {
   const handleLeave = () => {
     setIdHovered(-1);
   };
-  const addToCart = (e) =>{
-    const exist = cartState.products.find(el => el.id === city.id);
-    if(exist && exist.qty === city.qtyInStock){
-      alert("Quantità non disponibile in magazzino")
+  const addToCart = (e) => {
+    const exist = cartState.products.find((el) => el.id === city.id);
+    if (exist && exist.qty === city.qtyInStock) {
+      alert("Quantità non disponibile in magazzino");
     }
-    e.preventDefault()
-    e.stopPropagation()
-    
-    cartDispatch({ type: "ADD_TO_CART", payload: city })
-  }
+    e.preventDefault();
+    e.stopPropagation();
+
+    cartDispatch({ type: "ADD_TO_CART", payload: city });
+  };
 
   return (
     <NavLink
-      to={`${city.id}-${city.name}`}
+      to={`${city.id}`}
       id={`${city.id}`}
       className={`flex flex-wrap rounded-2xl min-w-[280px] w-[15%] shadow-lg shadow-amber-950 justify-center overflow-hidden bg-amber-950 text-amber-100   ${idHovered === city.id ? classe[1] : idHovered !== -1 ? classe[0] : classe[2]}`}
       onMouseEnter={(e) => handleEnter(e)}

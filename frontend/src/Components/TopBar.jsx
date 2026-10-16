@@ -8,7 +8,7 @@ function TopBar() {
   const { dispatch: uiDispatch } = useUi();
   const { itemTotalCartQty } = useCart();
   return (
-    <div className="flex flex-row justify-between h-34 w-full bg-gradient-to-b from-amber-900/90 to-amber-50/10 ">
+    <div className="flex flex-row justify-between h-34 w-full bg-linear-to-b from-amber-900/90 to-amber-50/10 ">
       <ul className="flex flex-row p-2 gap-2 justify-centers text-center">
         <li>
           <NavLink to="/">
@@ -21,7 +21,7 @@ function TopBar() {
           </NavLink>
         </li>
         <li className="flex items-center">
-          <NavLink className="btn-topbar" to="/Product">
+          <NavLink className="btn-topbar" to="/products">
             prodotti
           </NavLink>
         </li>
@@ -57,7 +57,7 @@ function TopBar() {
         <NavLink className="flex" to="/cart">
           <div className="flex relative group">
             <IoMdCart className=" hover:text-amber-950 text-2xl" />
-            <p className="flex justify-center items-center text-center rounded-full text-[0.70rem] p-1 h-[1rem] w-[1rem] bg-red-900 absolute right-[-0.4rem] top-[-0.4rem] ">
+            <p className="flex justify-center items-center text-center rounded-full text-[0.70rem] p-1 h-4 w-4 bg-red-900 absolute right-[-0.4rem] top-[-0.4rem] ">
               {itemTotalCartQty}
             </p>
             <div className="absolute right-0 top-full mt-2 w-72 bg-white shadow-lg rounded-xl border border-gray-200 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">

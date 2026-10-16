@@ -1,4 +1,5 @@
 import DirittoDiRecesso from "./Components/DirittoDiRecesso";
+import Ordini from "./Components/Ordini";
 import Account from "./Screen/Account";
 import CartTemplate from "./Screen/CartTemplate";
 import ChiSiamo from "./Screen/ChiSiamo";
@@ -26,11 +27,12 @@ export const routes = [
     path: "/account",
     element: <Account />,
   },
+  { path: "/account/ordini", element: <Ordini /> },
   {
-    path: "/product",
+    path: "/products",
     element: <ProductList />,
-    children: [{ path: ":id", element: <SingleProduct /> }],
   },
+  { path: "/products/:id", element: <SingleProduct /> },
   {
     path: "/chisiamo",
     element: <ChiSiamo />,

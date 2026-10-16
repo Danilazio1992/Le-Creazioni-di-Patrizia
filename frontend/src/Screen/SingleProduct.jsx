@@ -1,15 +1,32 @@
+import { useParams } from "react-router-dom";
+import { useUi } from "../UiContext/uiContext";
+
 function SingleProduct() {
+  const { id } = useParams();
+  console.log(id);
+  const { newData } = useUi();
+  console.log();
+  const city = newData.filter((el) => el.id == id)[0];
+
   return (
     <div className="w-full flex justify-center h-screen">
       <div className=" flex w-[90%] justify-center bg-amber-50 text-amber-950">
         <div className="flex flex-row h-96 p-2 gap-0.5 items-center">
           <div className="flex aspect-square h-full bg-amber-300 items-center justify-center rounded-md">
-            MAIN immagine
+            <img
+              className="flex w-full h-full"
+              src={city.imgUrl}
+              alt={`${city.name} photo`}
+            />
           </div>
           <div className="flex bg-amber-200 w-fit justify-center h-full rounded-md">
             <ul className="flex flex-col justify-between h-full w-full ">
               <li className="flex aspect-square p-2 bg-blue-200 rounded-md justify-center items-center ">
-                immagine
+                <img
+                  className="flex w-full h-full"
+                  src={city.imgUrl}
+                  alt={`${city.name} photo`}
+                />
               </li>
               <li className="flex aspect-square p-2 bg-blue-200 rounded-md justify-center items-center ">
                 immagine
