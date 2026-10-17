@@ -6,6 +6,7 @@ export const fakeUsers = [
     password: "123456",
     role: "admin",
     avatar: "https://i.pravatar.cc/150?img=3",
+    orders: [1],
   },
   {
     id: 2,

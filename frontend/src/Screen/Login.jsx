@@ -112,6 +112,12 @@ function Login() {
       >
         logga
       </button>
+      <button
+        onClick={() => console.log(authState)}
+        className="flex p-2 items-center justify-center bg-amber-900 rounded-md hover:bg-amber-900/90 cursor-pointer hover:border hover: border-amber-950 hover: shadow-md hover:shadow-amber-950 "
+      >
+        check user
+      </button>
     </div>
   );
 }
