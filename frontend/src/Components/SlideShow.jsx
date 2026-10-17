@@ -41,7 +41,7 @@ function SlideShow() {
         setIsLoading(false);
       } catch (err) {
         console.error("fetch Error", err);
-        setError(err.message || "Errore di rete")
+        setError(err.message || "Errore di rete");
       } finally {
         setIsLoading(false);
       }
@@ -56,12 +56,12 @@ function SlideShow() {
           <p className="text-xl font-bold">Loading...</p>
         </div>
       ) : error ? (
-  <div className="flex justify-center items-center h-96 text-gray-700">
-    <p className="text-xl font-bold">Errore: {error}</p>
-  </div>
-) : (
+        <div className="flex justify-center items-center h-96 text-gray-700">
+          <p className="text-xl font-bold">Errore: {error}</p>
+        </div>
+      ) : (
         <>
-          <div className="flex justify-center p-4 max-lg:h-[20rem] h-[30rem] relative">
+          <div className="flex justify-center p-4 max-lg:h-80 h-120 relative">
             <div className="relative overflow-hidden w-[50%] shadow-md shadow-amber-900 rounded-[10px] ">
               <div
                 className="flex transition-transform duration-1000 ease-in-out h-full"

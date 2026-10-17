@@ -4,75 +4,52 @@ import logo from "../assets/logo.png";
 import { useCart } from "../cartContext/cartContex";
 import { useUi } from "../UiContext/uiContext";
 
+const links = [
+  { to: "/", label: "Home" },
+  { to: "/products", label: "Prodotti" },
+  { to: "/chisiamo", label: "Chi siamo" },
+  { to: "/account", label: "Account" },
+];
+const linkStyle = "inline-flex min-h-11 items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:bg-[#fae5cd] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-800";
+
 function TopBar() {
   const { dispatch: uiDispatch } = useUi();
   const { itemTotalCartQty } = useCart();
   return (
-    <div className="flex flex-row justify-between h-34 w-full bg-linear-to-b from-amber-900/90 to-amber-50/10 ">
-      <ul className="flex flex-row p-2 gap-2 justify-centers text-center">
-        <li>
-          <NavLink to="/">
-            <img className="h-full flex" src={logo} alt="" />
-          </NavLink>
-        </li>
-        <li className="flex items-center">
-          <NavLink className="btn-topbar" to="/">
-            Home
-          </NavLink>
-        </li>
-        <li className="flex items-center">
-          <NavLink className="btn-topbar" to="/products">
-            prodotti
-          </NavLink>
-        </li>
-        <li className="flex items-center">
-          <NavLink className="btn-topbar" to="/chisiamo">
-            chi siamo?
-          </NavLink>
-        </li>
-        <li className="flex items-center">
-          <div
-            onClick={() => uiDispatch({ type: "openSideBar" })}
-            className="btn-topbar"
-          >
-            contatti
-          </div>
-        </li>
-        <li className="flex items-center">
-          <NavLink /* onClick={() => uiDispatch({ type: "SIGNIN" })} */
-            className="btn-topbar"
-            to="/account"
-          >
-            PROVA
-          </NavLink>
-        </li>
-      </ul>
-      <ul className="flex flex-row p-2 gap-4 items-center justify-center text-center">
-        <li className="btn-topbar" onClick={() => uiDispatch({ type: "SPOT" })}>
-          Registrati
-        </li>
-        <li className="btn-topbar">
-          <NavLink to="/Login">Accedi</NavLink>
-        </li>
-        <NavLink className="flex" to="/cart">
-          <div className="flex relative group">
-            <IoMdCart className=" hover:text-amber-950 text-2xl" />
-            <p className="flex justify-center items-center text-center rounded-full text-[0.70rem] p-1 h-4 w-4 bg-red-900 absolute right-[-0.4rem] top-[-0.4rem] ">
-              {itemTotalCartQty}
-            </p>
-            <div className="absolute right-0 top-full mt-2 w-72 bg-white shadow-lg rounded-xl border border-gray-200 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
-              {/* CONTENUTO */}
-              <div className="p-3 flex flex-col gap-2 text-amber-950">
-                <div className="text-sm">Prodotto 1</div>
-                <div className="text-sm">Prodotto 2</div>
-                <div className="text-sm">Prodotto 3</div>
-              </div>
-            </div>
-          </div>
+    <header className="w-full border-b border-amber-900/10 bg-[#fff8f1] text-amber-950 shadow-[0_4px_24px_rgba(69,26,3,0.05)]">
+      <div className="h-1 bg-linear-to-r from-[#fae5cd] via-amber-800/60 to-[#fae5cd]" />
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 sm:px-6 lg:px-8">
+        <NavLink to="/" aria-label="Le Creazioni di Patrizia - Home" className="shrink-0 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-800">
+          <img className="h-20 w-36 object-contain sm:h-24 sm:w-44" src={logo} alt="Le Creazioni di Patrizia" />
         </NavLink>
-      </ul>
-    </div>
+        <nav aria-label="Navigazione principale" className="order-3 w-full border-t border-amber-900/10 pt-3 xl:order-0 xl:w-auto xl:border-0 xl:pt-0">
+          <ul className="flex flex-wrap items-center justify-center gap-1">
+            {links.map(({ to, label }) => (
+              <li key={to}>
+                <NavLink to={to} end={to === "/"} className={({ isActive }) => `${linkStyle} ${isActive ? "bg-[#fae5cd] text-amber-950" : "text-amber-950/75"}`}>
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+            <li>
+              <button type="button" onClick={() => uiDispatch({ type: "openSideBar" })} className={`${linkStyle} cursor-pointer text-amber-950/75`}>Contatti</button>
+            </li>
+          </ul>
+        </nav>
+        <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
+          <NavLink to="/Login" className={`${linkStyle} hidden sm:inline-flex`}>Accedi</NavLink>
+          <button type="button" onClick={() => uiDispatch({ type: "SPOT" })} className="group inline-flex min-h-11 cursor-pointer items-center gap-3 rounded-full bg-amber-950 px-5 py-3 text-sm font-bold text-[#fff8f1] shadow-md shadow-amber-950/15 transition duration-200 hover:-translate-y-0.5 hover:bg-amber-900 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-800 motion-reduce:transform-none">
+            Registrati
+            <span aria-hidden="true" className="transition-transform group-hover:translate-x-1 motion-reduce:transform-none">&rarr;</span>
+          </button>
+          <NavLink to="/cart" aria-label={`Carrello, ${itemTotalCartQty} articoli`} className="relative ml-1 inline-flex size-11 items-center justify-center rounded-full border border-amber-900/15 bg-[#fae5cd]/40 transition-colors hover:bg-[#fae5cd] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-800">
+            <IoMdCart className="text-2xl" />
+            <span className="absolute -top-1 -right-1 flex min-w-5 items-center justify-center rounded-full bg-amber-950 px-1 text-[0.65rem] leading-5 font-bold text-[#fff8f1] ring-2 ring-[#fff8f1]">{itemTotalCartQty}</span>
+          </NavLink>
+        </div>
+        <NavLink to="/Login" className={`${linkStyle} order-4 w-full sm:hidden`}>Accedi</NavLink>
+      </div>
+    </header>
   );
 }
-
 export default TopBar;
