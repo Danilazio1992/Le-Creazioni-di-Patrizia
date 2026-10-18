@@ -14,6 +14,7 @@ import LegalTemplate from "./Screen/LegalTemplate";
 import Login from "./Screen/Login";
 import Ordini from "./Screen/Ordini";
 import ProductList from "./Screen/ProductList";
+import Signin from "./Screen/Signin";
 import SingleProduct from "./Screen/SingleProduct";
 import TerminiCondizioniUso from "./Screen/TerminiCondizioniUso";
 export const routes = [
@@ -37,6 +38,10 @@ export const routes = [
       {
         path: "richieste",
         element: <Richieste />,
+      },
+      {
+        path: "profilo",
+        element: <Signin />,
       },
       { path: "mainSection", element: <AccountSection /> },
     ],
