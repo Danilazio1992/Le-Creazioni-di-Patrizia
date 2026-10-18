@@ -1,6 +1,6 @@
+import AccountSection from "./Components/AccountSection";
 import DirittoDiRecesso from "./Components/DirittoDiRecesso";
 import Documenti from "./Components/Documenti";
-import Ordini from "./Screen/Ordini";
 import Richieste from "./Components/Richieste";
 import Account from "./Screen/Account";
 import CartTemplate from "./Screen/CartTemplate";
@@ -12,10 +12,10 @@ import Home from "./Screen/Home";
 import LegalMainPage from "./Screen/LegalMainPage";
 import LegalTemplate from "./Screen/LegalTemplate";
 import Login from "./Screen/Login";
+import Ordini from "./Screen/Ordini";
 import ProductList from "./Screen/ProductList";
 import SingleProduct from "./Screen/SingleProduct";
 import TerminiCondizioniUso from "./Screen/TerminiCondizioniUso";
-
 export const routes = [
   {
     path: "/",
@@ -38,6 +38,7 @@ export const routes = [
         path: "richieste",
         element: <Richieste />,
       },
+      { path: "mainSection", element: <AccountSection /> },
     ],
   },
   {

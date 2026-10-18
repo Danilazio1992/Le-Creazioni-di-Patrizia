@@ -8,7 +8,7 @@ const links = [
   { to: "/", label: "Home" },
   { to: "/products", label: "Prodotti" },
   { to: "/chisiamo", label: "Chi siamo" },
-  { to: "/account", label: "Account" },
+  { to: "/account/mainSection", label: "Account" },
 ];
 const linkStyle =
   "inline-flex min-h-11 items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:bg-[#fae5cd] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-800";

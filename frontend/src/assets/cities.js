@@ -7,7 +7,7 @@ export const cities = [
     description:
       "Capitale d'Italia, famosa per il Colosseo, il Vaticano e la sua storia millenaria.",
     isVisited: true,
-    price: 11.00,
+    price: 11.0,
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const cities = [
     description:
       "Culla del Rinascimento, nota per la Cupola del Brunelleschi e gli Uffizi.",
     isVisited: false,
-    price: 9.00,
+    price: 9.0,
   },
   {
     id: 3,
@@ -98,6 +98,14 @@ export const cities = [
     isVisited: true,
     price: 6.99,
   },
+];
+export const accountSections = [
+  { section: "ordini", route: "/account/ordini" },
+  { section: "documenti", route: "/account/documenti" },
+  { section: "richieste", route: "/account/richieste" },
+  { section: "profilo", route: "/account/profilo" },
+  { section: "indirizzi", route: "/account/indirizzi" },
+  { section: "sicurezza", route: "/account/sicurezza" },
 ];
 
 export const products = [

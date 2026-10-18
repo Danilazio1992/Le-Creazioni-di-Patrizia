@@ -1,14 +1,7 @@
+import { accountSections } from "../assets/cities";
 import { NavLink } from "react-router-dom";
 
 function AccountSidebar() {
-  const accountSections = [
-    { section: "ordini", route: "/account/ordini" },
-    { section: "documenti", route: "/account/documenti" },
-    { section: "richieste", route: "/account/richieste" },
-    { section: "profilo", route: "/account/profilo" },
-    { section: "indirizzi", route: "/account/indirizzi" },
-    { section: "sicurezza", route: "/account/sicurezza" },
-  ];
   const btnLi =
     "flex p-4 text-xs font-extrabold cursor-pointer hover:bg-[#fae5cd] rounded-md hover:text-amber-950 hover:shadow-inner hover:shadow-amber-900/50";
   return (
