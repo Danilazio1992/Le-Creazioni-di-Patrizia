@@ -8,7 +8,7 @@ function Ordini() {
       {!authState.isAuth ? (
         <p>Accedi per visualizzare i tuoi ordini.</p>
       ) : orders.length > 0 ? (
-        orders.map((orderId) => <OrderCards key={orderId} order={orderId} />)
+        orders.map((orderId) => <OrderCards key={orderId} orderId={orderId} />)
       ) : (
         <p>Non ci sono ordini.</p>
       )}
