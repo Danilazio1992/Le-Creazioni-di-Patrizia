@@ -1,3 +1,11 @@
+import {
+  FiFileText,
+  FiLock,
+  FiMapPin,
+  FiMessageSquare,
+  FiShoppingBag,
+  FiUser,
+} from "react-icons/fi";
 export const cities = [
   {
     id: 1,
@@ -43,7 +51,7 @@ export const cities = [
     id: 5,
     name: "Napoli",
     imgUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/7/79/Naples_and_Vesuvius.jpg",
+      "https://www.campania.info/wp-content/uploads/sites/111/napoli-vomero-hd.jpg",
     description:
       "Famosa per la pizza, il Vesuvio e la vista sul Golfo di Napoli.",
     isVisited: true,
@@ -99,13 +107,14 @@ export const cities = [
     price: 6.99,
   },
 ];
+
 export const accountSections = [
-  { section: "ordini", route: "/account/ordini" },
-  { section: "documenti", route: "/account/documenti" },
-  { section: "richieste", route: "/account/richieste" },
-  { section: "profilo", route: "/account/profilo" },
-  { section: "indirizzi", route: "/account/indirizzi" },
-  { section: "sicurezza", route: "/account/sicurezza" },
+  { section: "ordini", route: "/account/ordini", icon: FiShoppingBag },
+  { section: "documenti", route: "/account/documenti", icon: FiFileText },
+  { section: "richieste", route: "/account/richieste", icon: FiMessageSquare },
+  { section: "profilo", route: "/account/profilo", icon: FiUser },
+  { section: "indirizzi", route: "/account/indirizzi", icon: FiMapPin },
+  { section: "sicurezza", route: "/account/sicurezza", icon: FiLock },
 ];
 
 export const products = [

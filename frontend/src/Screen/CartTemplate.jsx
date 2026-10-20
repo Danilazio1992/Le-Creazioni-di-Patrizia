@@ -17,7 +17,7 @@ function CartTemplate() {
       );
       console.log(cartState.products, "sono i prodotti nel carrello");
       console.log(result);
-      console.log(`prodotti nel carrello: ${itemTotalCartQty}`)
+      console.log(`prodotti nel carrello: ${itemTotalCartQty}`);
       return;
     }
   };
@@ -39,7 +39,7 @@ function CartTemplate() {
   const cartTotal = cartFull.reduce((acc, product) => {
     return acc + product.price * product.cartQty;
   }, 0);
-  
+
   return (
     <div className=" flex flex-col w-screen min-h-96 items-center p-2">
       <nav className="flex flex-col w-[85%] h-fit p-2">
@@ -55,7 +55,7 @@ function CartTemplate() {
       {cartFull.map((prod, i) => (
         <section
           key={i}
-          className="flex flex-row p-2 bg-amber-100/50 w-[85%] h-40 gap-2 items-center justify-around text-amber-950"
+          className="flex flex-row p-2 rounded-lg bg-[#fdeede] w-[85%] h-40 gap-2 items-center justify-around text-amber-950"
         >
           <CartProduct key={prod.id} product={prod} />
         </section>

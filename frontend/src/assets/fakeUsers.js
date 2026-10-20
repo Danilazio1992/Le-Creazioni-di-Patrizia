@@ -8,31 +8,34 @@ export const fakeUsers = [
     avatar: "https://i.pravatar.cc/150?img=3",
     orders: [1],
     Indirizzi: {
-      fatturazione:[{nome: "Daniele",
-      cognome: "Tentella",
-      via: "Via Mezzoldo" ,
-      civico: "36",
-      cap: "00125",
-      località: "Roma",
-      provincia: "Roma",
-      telefono: "+39 3801329455",
-      email: "daniele@test.com",
-      codiceFiscale:"TNTDNL92S27H501T",}
-    ],
-      spedizione:[
+      fatturazione: [
         {
           nome: "Daniele",
           cognome: "Tentella",
-          via: "Via Mezzoldo" ,
+          via: "Via Mezzoldo",
           civico: "36",
           cap: "00125",
           località: "Roma",
           provincia: "Roma",
           telefono: "+39 3801329455",
           email: "daniele@test.com",
-        }
+          codiceFiscale: "TNTDNL92S27H501T",
+        },
       ],
-    }
+      spedizione: [
+        {
+          nome: "Daniele",
+          cognome: "Tentella",
+          via: "Via Mezzoldo",
+          civico: "36",
+          cap: "00125",
+          località: "Roma",
+          provincia: "Roma",
+          telefono: "+39 3801329455",
+          email: "daniele@test.com",
+        },
+      ],
+    },
   },
   {
     id: 2,

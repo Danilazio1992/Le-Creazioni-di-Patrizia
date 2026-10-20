@@ -12,12 +12,6 @@ function Ordini() {
       ) : (
         <p>Non ci sono ordini.</p>
       )}
-      <button
-        className="flex p-2 bg-amber-950 h-fit w-fit"
-        onClick={() => console.log(orders)}
-      >
-        logga
-      </button>
     </div>
   );
 }

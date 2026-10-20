@@ -1,25 +1,35 @@
 export const orders = [
   {
     id: 1,
-    prodotti: {
-      id: 100,
-      variantId: 101,
-      qty: 1,
-    },
+    prodotti: [
+      {
+        id: 1,
+        variantId: 101,
+        qty: 1,
+        prezzo: 10.59,
+        nome: "Lazio",
+        marca: "NIKE",
+      },
+      {
+        id: 2,
+        variantId: 101,
+        qty: 4,
+      },
+    ],
     clientId: 1231,
     cliente: {},
     spedizione: {},
     fatturazione: {
       nome: "Daniele",
       cognome: "Tentella",
-      via: "Via Mezzoldo" ,
+      via: "Via Mezzoldo",
       civico: "36",
       cap: "00125",
       località: "Roma",
       provincia: "Roma",
       telefono: "+39 3801329455",
       email: "daniele@test.com",
-      codiceFiscale:"TNTDNL92S27H501T",
+      codiceFiscale: "TNTDNL92S27H501T",
     },
     totale: 256.56,
     valuta: "€",
