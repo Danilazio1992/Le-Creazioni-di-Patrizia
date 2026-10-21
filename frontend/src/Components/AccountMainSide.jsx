@@ -3,18 +3,19 @@ import { fakeUsers } from "../assets/fakeUsers";
 import { useAuth } from "../AuthContext/authContext";
 function AccountMainSide() {
   let user = fakeUsers.find((el) => el.email === "daniele@test.com");
+  const {state: authState } = useAuth()
   const { dispatch: authDispatch } = useAuth();
   return (
     <div className="flex flex-col w-full h-full p-10 items-center">
       <Outlet />
-      <button
+      {!authState.isAuth && <button
         className="flex p-2 bg-amber-950 h-fit w-fit"
         onClick={() =>
           authDispatch({ type: "LOGIN_SUCCESS", payload: { user } })
         }
       >
         logga
-      </button>
+      </button>}
     </div>
   );
 }

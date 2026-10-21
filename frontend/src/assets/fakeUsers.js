@@ -7,7 +7,7 @@ export const fakeUsers = [
     role: "admin",
     avatar: "https://i.pravatar.cc/150?img=3",
     orders: [1],
-    Indirizzi: {
+    indirizzi: {
       fatturazione: [
         {
           nome: "Daniele",

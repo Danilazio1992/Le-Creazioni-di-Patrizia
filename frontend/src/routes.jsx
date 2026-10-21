@@ -17,6 +17,7 @@ import ProductList from "./Screen/ProductList";
 import Signin from "./Screen/Signin";
 import SingleProduct from "./Screen/SingleProduct";
 import TerminiCondizioniUso from "./Screen/TerminiCondizioniUso";
+import Indirizzi from "./Components/Indirizzi";
 export const routes = [
   {
     path: "/",
@@ -42,6 +43,10 @@ export const routes = [
       {
         path: "profilo",
         element: <Signin />,
+      },
+      {
+        path: "indirizzi",
+        element: <Indirizzi />,
       },
       { path: "mainSection", element: <AccountSection /> },
     ],
