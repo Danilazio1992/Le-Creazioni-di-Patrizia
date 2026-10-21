@@ -21,6 +21,18 @@ export const fakeUsers = [
           email: "daniele@test.com",
           codiceFiscale: "TNTDNL92S27H501T",
         },
+        {
+          nome: "Daniele",
+          cognome: "Tentella",
+          via: "Via Mezzoldo",
+          civico: "36",
+          cap: "00125",
+          località: "Roma",
+          provincia: "Roma",
+          telefono: "+39 3801329455",
+          email: "daniele@test.com",
+          codiceFiscale: "TNTDNL92S27H501T",
+        },
       ],
       spedizione: [
         {
