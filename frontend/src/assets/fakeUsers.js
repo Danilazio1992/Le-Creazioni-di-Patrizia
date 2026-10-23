@@ -10,6 +10,7 @@ export const fakeUsers = [
     indirizzi: {
       fatturazione: [
         {
+          billingId:1,
           nome: "Daniele",
           cognome: "Tentella",
           via: "Via Mezzoldo",
@@ -22,6 +23,7 @@ export const fakeUsers = [
           codiceFiscale: "TNTDNL92S27H501T",
         },
         {
+          billingId:2,
           nome: "Daniele",
           cognome: "Tentella",
           via: "Via Mezzoldo",
@@ -36,6 +38,7 @@ export const fakeUsers = [
       ],
       spedizione: [
         {
+          shipmentId:1,
           nome: "Daniele",
           cognome: "Tentella",
           via: "Via Mezzoldo",

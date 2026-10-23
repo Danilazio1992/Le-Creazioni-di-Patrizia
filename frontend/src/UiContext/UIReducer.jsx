@@ -1,10 +1,13 @@
 export function uiReducer(state, action) {
   switch (action.type) {
     case "OPEN_MODAL":
-      console.log("apro modale");
       return { ...state, isModal: true };
     case "closeModal":
       return { ...state, isModal: false, modalContent: null };
+    case "OPEN_ADDRESS_MODAL":
+      return {...state, isAddressModal: true, address: action.payload};
+    case "CLOSE_ADDRESS_MODAL":
+      return {...state, isAddressModal: false};
     case "SPOT":
       return { ...state, isModal: true, modalContent: "SPOT" };
     case "SIGNIN":

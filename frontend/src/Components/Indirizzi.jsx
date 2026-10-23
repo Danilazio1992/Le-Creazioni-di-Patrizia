@@ -1,15 +1,16 @@
-import { useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useAuth } from "../AuthContext/authContext";
+import { useUi } from "../UiContext/uiContext";
 import IndirizziModal from "./IndirizziModal";
 function Indirizzi() {
   const { state: authState } = useAuth();
+  const { state: uiState, dispatch: uiDispatch} = useUi()
   const indirizziDiFatturazione = authState.user?.indirizzi.fatturazione;
   const indirizziDiSpedizione = authState.user?.indirizzi.spedizione;
-  const [state, setState] = useState(false);
+  const shippigModifier = (addressId) => { uiDispatch({ type: "OPEN_ADDRESS_MODAL", payload:addressId })}
   return (
     <div className="flex flex-col gap-4 justify-center items-center p-2 w-full h-full">
-      {state && <IndirizziModal />}
+      {uiState.isAddressModal && <IndirizziModal />}
       {!authState.isAuth ? (
         <p>Accedi per visualizzare i tuoi Indirizzi.</p>
       ) : (
@@ -20,8 +21,7 @@ function Indirizzi() {
                 Indirizzi di Fatturazione
               </h2>
               <button className="flex p-2 rounded-xl bg-amber-100/50 hover:bg-amber-100/80 hover:text-amber-950">
-                {" "}
-                Aggiungi Indirizzo{" "}
+                Aggiungi Indirizzo
               </button>
             </div>
             <div className="w-full h-full flex flex-wrap gap-2 p-2">
@@ -36,6 +36,7 @@ function Indirizzi() {
                   <button
                     key={"Button " + billingAddress.id}
                     className="absolute top-2 right-2 font-extrabold uppercase p-2 rounded-xl bg-amber-950/80 hover:shadow-sm hover:shadow-amber-950 cursor-pointer hover:bg-amber-100 hover:text-yellow-950"
+                    onClick={() => shippigModifier(billingAddress)}
                   >
                     <IoSettingsOutline />
                   </button>
@@ -60,7 +61,7 @@ function Indirizzi() {
                   ))}
                   <button
                     key={"Button " + shippingAddress.id}
-                    onClick={() => setState((prev) => !prev)}
+                    onClick={() => shippigModifier(shippingAddress)}
                     className="absolute top-2 right-2 font-extrabold uppercase p-2 rounded-xl bg-amber-950/80 hover:shadow-sm hover:shadow-amber-950 cursor-pointer hover:bg-amber-100 hover:text-yellow-950"
                   >
                     <IoSettingsOutline />
@@ -71,7 +72,7 @@ function Indirizzi() {
           </div>
 
           <button
-            onClick={(prev) =>
+            onClick={() =>
               console.log(authState.user.indirizzi.fatturazione[0])
             }
             className="justify-center p-2 rounded-2xl bg-amber-950/90 w-fit"
