@@ -21,6 +21,7 @@ function Login() {
   const handleChange = (e) => {
     const emailInvalidCharsRegex = /[^a-zA-Z0-9._%+-@]/;
     const passwordInvalidCharsRegex =
+      // eslint-disable-next-line no-useless-escape
       /[^a-zA-Z0-9!@#$%^&*()_\-+=\[\]{};:'",.<>/?|\\]/;
     let { name, value } = e.target;
     if (name === "email" && emailInvalidCharsRegex.test(value)) {
