@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { useUi } from "../UiContext/uiContext";
 import { useCart } from "../cartContext/cartContex";
+import { useAuth } from "../AuthContext/authContext";
 
 function CityCard({ city, idHovered, setIdHovered }) {
   const { handleRemove } = useUi();
   const { state: cartState, dispatch: cartDispatch, addToCart } = useCart();
+  const { state: authState } = useAuth();
 
   let modify = "H";
 
@@ -35,17 +37,20 @@ function CityCard({ city, idHovered, setIdHovered }) {
             src={city.imgUrl}
             alt={`${city.name} photo`}
           />
-          <div className=" absolute top-2 right-2 z-10 flex flex-col w-[10%] gap-2 justify-center items-center ">
-            <button className="flex justify-center p-2 bg-amber-500 min-w-8 w-full rounded-xl">
-              {modify}
-            </button>
-            <button
-              className="btn-exit"
-              onClick={(e) => handleRemove(e, city.id)}
-            >
-              X
-            </button>
-          </div>
+          {authState.user?.role === "admin" && (
+            <div className=" absolute top-2 right-2 z-10 flex flex-col w-[10%] gap-2 justify-center items-center ">
+              <button className="flex justify-center p-2 bg-amber-500 min-w-8 w-full rounded-xl">
+                {modify}
+              </button>
+
+              <button
+                className="btn-exit"
+                onClick={(e) => handleRemove(e, city.id)}
+              >
+                X
+              </button>
+            </div>
+          )}
         </div>
         <div className="relative flex flex-col justify-between items-center ">
           <h2 className="p-2 flex justify-center font-extrabold">

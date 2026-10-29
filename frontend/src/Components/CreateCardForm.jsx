@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useUi } from "../UiContext/uiContext";
-function CreateCardForm({ setNewData, setIsModal }) {
-  const { state: uiState, dispatch: uiDispatch } = useUi();
+
+function CreateCardForm() {
+  const { state: uiState, dispatch: uiDispatch, setNewData } = useUi();
   const [isHoverd, setIsHovered] = useState(false);
   const handleAddCity = (el) => {
     setNewData((prevData) => [...prevData, el]);
@@ -26,14 +27,14 @@ function CreateCardForm({ setNewData, setIsModal }) {
     let { name, imgUrl, description } = city;
     let dateId = Date.now();
     if (name && imgUrl && description) {
-      handleAddCity({ ...city, id: dateId });
+      handleAddCity({ ...city, id: dateId }); //spreaddo la citta e aggiungo la prop id: con il valore dateId
       setCity({
         name: "",
         imgUrl: "",
         description: "",
         isVisited: false,
       });
-      setIsModal(false);
+      uiDispatch({ type: "closeModal" });
     } else {
       alert("complila tutti i campi");
     }

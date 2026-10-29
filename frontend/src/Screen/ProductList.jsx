@@ -12,7 +12,7 @@ function ProductList() {
       <div className=" flex flex-col">
         <div className="flex flex-wrap gap-4 p-4 w-full justify-center ">
           {newData
-            .filter((el, i) => i < 5)
+            .filter((el, i) => i < 15)
             .map((city) => (
               <CityCard
                 city={city}

@@ -13,7 +13,7 @@ function OrderCards({ orderId }) {
     <div className="flex flex-col  bg-amber-900/50  w-[90%] h-96  rounded-lg justify-between items-center shadow-md shadow-amber-950">
       <div className="flex justify-between bg-amber-950/70 p-2 w-full rounded-t-lg font-extrabold">
         <p>Numero Ordine: {orderFiltered.id}</p>
-        <p> {orderFiltered.data}</p>
+        <p> Ordine Effettuato il: {orderFiltered.data}</p>
       </div>
       <div className="flex flex-row w-full h-fit gap-2 p-2">
         {productFiltered.map((el) => (

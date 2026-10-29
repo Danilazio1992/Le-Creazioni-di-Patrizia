@@ -61,7 +61,7 @@ export const cities = [
     id: 6,
     name: "Torino",
     imgUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/4/4d/Turin_Mole_Antonelliana.jpg",
+      "https://cdn.sanity.io/images/nxpteyfv/goguides/1039123c15983ab4e962a7e71dba226bf54b5e36-1600x1066.jpg?fp-x=0.5&fp-y=0.5&w=1600&q=75&fit=max&auto=format",
     description:
       "Antica capitale d'Italia, celebre per la Mole Antonelliana e la storia sabauda.",
     isVisited: false,
@@ -71,7 +71,7 @@ export const cities = [
     id: 7,
     name: "Bologna",
     imgUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/5/5d/Bologna_Two_Towers.jpg",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/8f/65/8c/photo0jpg.jpg?w=1200&h=-1&s=1",
     description: "Nota per le due torri, i portici e la cucina tradizionale.",
     isVisited: false,
     price: 9.99,
@@ -80,7 +80,7 @@ export const cities = [
     id: 8,
     name: "Verona",
     imgUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/5/5b/Verona_Panorama.jpg",
+      "https://www.inviaggioconmonica.it/wp-content/uploads/2023/11/Verona-Piazza-Bra-Arena.jpg",
     description:
       "Città romantica famosa per l’Arena e la leggenda di Romeo e Giulietta.",
     isVisited: true,

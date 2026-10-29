@@ -6,11 +6,11 @@ export const fakeUsers = [
     password: "123456",
     role: "admin",
     avatar: "https://i.pravatar.cc/150?img=3",
-    orders: [1],
+    orders: [1, 1],
     indirizzi: {
       fatturazione: [
         {
-          billingId:1,
+          billingId: 1,
           nome: "Daniele",
           cognome: "Tentella",
           via: "Via Mezzoldo",
@@ -23,7 +23,7 @@ export const fakeUsers = [
           codiceFiscale: "TNTDNL92S27H501T",
         },
         {
-          billingId:2,
+          billingId: 2,
           nome: "Daniele",
           cognome: "Tentella",
           via: "Via Mezzoldo",
@@ -38,7 +38,7 @@ export const fakeUsers = [
       ],
       spedizione: [
         {
-          shipmentId:1,
+          shipmentId: 1,
           nome: "Daniele",
           cognome: "Tentella",
           via: "Via Mezzoldo",
