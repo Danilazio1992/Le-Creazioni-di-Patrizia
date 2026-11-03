@@ -65,7 +65,7 @@ function TopBar() {
           </NavLink>
           <button
             type="button"
-            onClick={() => uiDispatch({ type: "SPOT" })}
+            onClick={() => uiDispatch({ type: "SIGNIN" })}
             className="group inline-flex min-h-11 cursor-pointer items-center gap-3 rounded-full bg-amber-950 px-5 py-3 text-sm font-bold text-[#fff8f1] shadow-md shadow-amber-950/15 transition duration-200 hover:-translate-y-0.5 hover:bg-amber-900 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-800 motion-reduce:transform-none"
           >
             Registrati

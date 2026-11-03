@@ -1,10 +1,71 @@
-﻿function Signin() {
+﻿import { useReducer } from "react";
+const formInitialState = {
+  values: {
+    id: 0,
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    avatar: "",
+    orders: [],
+    indirizzi: {
+      fatturazione: [],
+      spedizione: [],
+    },
+  },
+  errors: {},
+};
+
+function registrationFormReducer(state, action) {
+  switch (action.type) {
+    case "UPDATE_FIELD":
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          [action.payload.name]: action.payload.finalValue,
+        },
+      };
+    case "RESET_FIELD":
+      return { ...state, isModal: false, modalContent: null };
+    case "OPEN_ADDRESS_MODAL":
+      return { ...state, isAddressModal: true, address: action.payload };
+    case "SPOT":
+      return { ...state, isModal: true, modalContent: "SPOT" };
+    case "SIGNIN":
+      return { ...state, isModal: true, modalContent: "SIGNIN" };
+    default:
+      return state; //return default sempre state cosi che in caso di azione non riconosciuta non si rompe l'app
+  }
+}
+
+function Signin() {
+  const [state, dispatch] = useReducer(
+    registrationFormReducer,
+    formInitialState,
+  );
+  const handleChange = (e) => {
+    const { name, type, checked, value } = e.target;
+    const finalValue = type === "checkbox" ? checked : value;
+    const emailInvalidCharsRegex = /[^a-zA-Z0-9._%+-@]/;
+    const passwordInvalidCharsRegex =
+      // eslint-disable-next-line no-useless-escape
+      /[^a-zA-Z0-9!@#$%^&*()_\-+=\[\]{};:'",.<>/?|\\]/;
+    if (name === "email" && emailInvalidCharsRegex.test(finalValue)) {
+      console.log("invalid");
+      return;
+    }
+    if (name === "password" && passwordInvalidCharsRegex.test(finalValue)) {
+      return;
+    }
+    dispatch({ type: "UPDATE_FIELD", payload: { name, finalValue } });
+  };
   return (
     <section
       aria-labelledby="signin-title"
-      className="min-w-0 w-full h-full bg-[#fae5cd] px-4 py-10 text-amber-950  "
+      className="min-w-0 w-full h-full bg-[#fae5cd] px-4 py-10 text-amber-950 overflow-auto "
     >
-      <div className="mx-auto min-w-0 w-full max-w-3xl ">
+      <div className="mx-auto min-w-0 w-full max-w-3xl  ">
         <header className="mb-8 max-w-xl sm:mb-10">
           <p className="inline-block border-l-2 border-amber-700/50 pl-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-800">
             Le Creazioni di Patrizia
@@ -38,11 +99,13 @@
                   Nome
                 </label>
                 <input
-                  id="nome"
-                  name="nome"
+                  id="name"
+                  name="name"
                   type="text"
+                  value={state.values.name}
                   placeholder="Mario"
                   autoComplete="given-name"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -59,6 +122,7 @@
                   type="text"
                   placeholder="Rossi"
                   autoComplete="family-name"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -75,6 +139,7 @@
                   type="date"
                   autoComplete="bday"
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  onChange={(e) => console.log(e.target.value)}
                 />
               </div>
               <div className="min-w-0">
@@ -89,6 +154,8 @@
                   name="codice_Fiscale"
                   type="text"
                   placeholder="RSSMRA80A01H501U"
+                  autoComplete=""
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -105,6 +172,7 @@
                   type="tel"
                   placeholder="+39 333 1234567"
                   autoComplete="mobile tel"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -121,6 +189,7 @@
                   type="tel"
                   placeholder="06 1234567"
                   autoComplete="home tel"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -144,6 +213,7 @@
                   type="text"
                   placeholder="Via dei Fiori"
                   autoComplete="address-line1"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -160,6 +230,7 @@
                   type="text"
                   placeholder="12"
                   autoComplete="address-line2"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -177,6 +248,24 @@
                   placeholder="00100"
                   autoComplete="postal-code"
                   inputMode="numeric"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                />
+              </div>
+              <div className="min-w-0">
+                <label
+                  htmlFor="via"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                >
+                  Località
+                </label>
+                <input
+                  id="localita"
+                  name="localita"
+                  type="text"
+                  placeholder="Roma"
+                  autoComplete="address-level2"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -187,6 +276,7 @@
                 name="indirizzo_spedizione"
                 type="checkbox"
                 defaultChecked
+                onChange={(e) => handleChange(e)}
                 className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
               />
               <label
@@ -204,22 +294,6 @@
             <div className="mt-3 grid min-w-0 grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
               <div className="min-w-0">
                 <label
-                  htmlFor="nome_visualizzato"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  Nome visualizzato
-                </label>
-                <input
-                  id="nome_visualizzato"
-                  name="nome_visualizzato"
-                  type="text"
-                  placeholder="Come vuoi essere chiamato"
-                  autoComplete="nickname"
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                />
-              </div>
-              <div className="min-w-0">
-                <label
                   htmlFor="email"
                   className="block text-sm font-medium leading-5 text-amber-950/85"
                 >
@@ -230,7 +304,9 @@
                   name="email"
                   type="email"
                   placeholder="mario@esempio.it"
+                  value={state.values.email}
                   autoComplete="email"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
@@ -247,11 +323,53 @@
                   type="password"
                   placeholder="Scegli una password"
                   autoComplete="new-password"
+                  onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
             </div>
           </fieldset>
+          <div className="mt-6 flex flex-col gap-4 rounded-xl border border-amber-900/10 bg-amber-50/70 p-4">
+            {/* NEWSLETTER (Opzionale) */}
+            <div className="flex min-w-0 items-start gap-3">
+              <input
+                id="newsletter"
+                name="newsletter"
+                type="checkbox"
+                className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
+              />
+              <label
+                htmlFor="newsletter"
+                className="min-w-0 cursor-pointer text-sm leading-6 text-amber-950/80 required"
+              >
+                Iscriviti alla Newsletter per ricevere aggiornamenti e offerte.
+              </label>
+            </div>
+
+            {/* PRIVACY POLICY (Obbligatorio) */}
+            <div className="flex min-w-0 items-start gap-3">
+              <input
+                id="privacy_policy"
+                name="privacy_policy"
+                type="checkbox"
+                className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
+              />
+              <label
+                htmlFor="privacy_policy"
+                className="min-w-0 cursor-pointer text-sm leading-6 text-amber-950/80"
+              >
+                Dichiaro di aver letto e accettato la{" "}
+                <a
+                  href="/privacy-policy"
+                  className="underline font-medium hover:text-amber-900"
+                >
+                  Privacy Policy
+                </a>{" "}
+                per il trattamento dei miei dati personali.{" "}
+                <span className="text-red-600">*</span>
+              </label>
+            </div>
+          </div>
           <footer className="flex min-w-0 flex-col-reverse gap-5 border-t border-amber-900/12 pt-7 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
             <p className="min-w-0 text-center text-sm leading-6 text-amber-900/75 sm:text-left">
               Hai già un account?{" "}
@@ -266,6 +384,7 @@
             <button
               type="button"
               className="inline-flex min-h-12 w-full min-w-0 max-w-full items-center justify-center rounded-lg border border-amber-950/10 bg-amber-900 px-8 py-3 text-center text-sm font-semibold leading-6 text-amber-50 shadow-sm transition-[background-color,box-shadow] duration-150 hover:bg-amber-800 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700 active:bg-amber-950 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none sm:w-auto"
+              onClick={() => console.log(state)}
             >
               Crea account
             </button>
@@ -277,3 +396,4 @@
 }
 
 export default Signin;
+let checkFinale = () => {};
