@@ -12,6 +12,9 @@ const formInitialState = {
       fatturazione: [],
       spedizione: [],
     },
+    newsletter: true,
+    privacy: false,
+    shippingAddress: true,
   },
   errors: {},
 };
@@ -139,7 +142,7 @@ function Signin() {
                   type="date"
                   autoComplete="bday"
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => handleChange(e)}
                 />
               </div>
               <div className="min-w-0">
@@ -272,10 +275,10 @@ function Signin() {
             </div>
             <div className="mt-6 flex min-w-0 items-start gap-3 rounded-xl border border-amber-900/10 bg-amber-50/70 p-4">
               <input
-                id="indirizzo_spedizione"
-                name="indirizzo_spedizione"
+                id="shippingAddres"
+                name="shippingAddress"
                 type="checkbox"
-                defaultChecked
+                checked={state.values.shippingAddress}
                 onChange={(e) => handleChange(e)}
                 className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
               />
@@ -287,6 +290,98 @@ function Signin() {
               </label>
             </div>
           </fieldset>
+          {!state.values.shippingAddress && <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
+            <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
+              Indirizzo di Spedizione
+            </legend>
+            <div className="mt-3 grid min-w-0 grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+              <div className="min-w-0">
+                <label
+                  htmlFor="via"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                >
+                  Via o piazza
+                </label>
+                <input
+                  id="via"
+                  name="via"
+                  type="text"
+                  placeholder="Via dei Fiori"
+                  autoComplete="address-line1"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                />
+              </div>
+              <div className="min-w-0">
+                <label
+                  htmlFor="civico"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                >
+                  Numero civico
+                </label>
+                <input
+                  id="civico"
+                  name="civico"
+                  type="text"
+                  placeholder="12"
+                  autoComplete="address-line2"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                />
+              </div>
+              <div className="min-w-0">
+                <label
+                  htmlFor="cap"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                >
+                  CAP
+                </label>
+                <input
+                  id="cap"
+                  name="cap"
+                  type="text"
+                  placeholder="00100"
+                  autoComplete="postal-code"
+                  inputMode="numeric"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                />
+              </div>
+              <div className="min-w-0">
+                <label
+                  htmlFor="via"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                >
+                  Località
+                </label>
+                <input
+                  id="localita"
+                  name="localita"
+                  type="text"
+                  placeholder="Roma"
+                  autoComplete="address-level2"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                />
+              </div>
+            </div>
+            <div className="mt-6 flex min-w-0 items-start gap-3 rounded-xl border border-amber-900/10 bg-amber-50/70 p-4">
+              <input
+                id="indirizzo_spedizione"
+                name="indirizzo_spedizione"
+                type="checkbox"
+                checked={state.values.sameAddress}
+                onChange={(e) => handleChange(e)}
+                className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
+              />
+              <label
+                htmlFor="indirizzo_spedizione"
+                className="min-w-0 cursor-pointer text-sm leading-6 text-amber-950/80"
+              >
+                Usa questo indirizzo anche per la spedizione.
+              </label>
+            </div>
+          </fieldset>}
           <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
             <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
               Il tuo account
@@ -336,11 +431,13 @@ function Signin() {
                 id="newsletter"
                 name="newsletter"
                 type="checkbox"
-                className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
+                checked={state.values.newsletter}
+                onChange={(e)=> handleChange(e)}
+                className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700 required"
               />
               <label
                 htmlFor="newsletter"
-                className="min-w-0 cursor-pointer text-sm leading-6 text-amber-950/80 required"
+                className="min-w-0 cursor-pointer text-sm leading-6 text-amber-950/80 "
               >
                 Iscriviti alla Newsletter per ricevere aggiornamenti e offerte.
               </label>
@@ -349,18 +446,20 @@ function Signin() {
             {/* PRIVACY POLICY (Obbligatorio) */}
             <div className="flex min-w-0 items-start gap-3">
               <input
-                id="privacy_policy"
-                name="privacy_policy"
+                id="privacy"
+                name="privacy"
                 type="checkbox"
+                checked={state.values.privacyPolicy}
+                onChange={(e)=> handleChange(e)}
                 className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
               />
               <label
-                htmlFor="privacy_policy"
+                htmlFor="privacy"
                 className="min-w-0 cursor-pointer text-sm leading-6 text-amber-950/80"
               >
                 Dichiaro di aver letto e accettato la{" "}
                 <a
-                  href="/privacy-policy"
+                  href="/privacy"
                   className="underline font-medium hover:text-amber-900"
                 >
                   Privacy Policy
@@ -384,7 +483,7 @@ function Signin() {
             <button
               type="button"
               className="inline-flex min-h-12 w-full min-w-0 max-w-full items-center justify-center rounded-lg border border-amber-950/10 bg-amber-900 px-8 py-3 text-center text-sm font-semibold leading-6 text-amber-50 shadow-sm transition-[background-color,box-shadow] duration-150 hover:bg-amber-800 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700 active:bg-amber-950 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none sm:w-auto"
-              onClick={() => console.log(state)}
+              onClick={() => console.log(state.values)}
             >
               Crea account
             </button>
@@ -396,4 +495,3 @@ function Signin() {
 }
 
 export default Signin;
-let checkFinale = () => {};
