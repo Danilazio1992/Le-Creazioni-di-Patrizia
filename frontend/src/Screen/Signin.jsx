@@ -2,11 +2,16 @@
 const formInitialState = {
   values: {
     id: 0,
+    typeOfAccount: "privato",
     name: "",
     email: "",
     password: "",
     role: "",
     avatar: "",
+    birthday: "",
+    codice_Fiscale: "",
+    mobile_phone: "",
+
     orders: [],
     indirizzi: {
       fatturazione: [],
@@ -31,12 +36,12 @@ function registrationFormReducer(state, action) {
       };
     case "RESET_FIELD":
       return { ...state, isModal: false, modalContent: null };
-    case "OPEN_ADDRESS_MODAL":
-      return { ...state, isAddressModal: true, address: action.payload };
-    case "SPOT":
-      return { ...state, isModal: true, modalContent: "SPOT" };
-    case "SIGNIN":
-      return { ...state, isModal: true, modalContent: "SIGNIN" };
+    case "TYPE_OF_ACCOUNT":
+      return {
+        ...state,
+        values: { ...state.values, typeOfAccount: action.payload.finalValue },
+      };
+
     default:
       return state; //return default sempre state cosi che in caso di azione non riconosciuta non si rompe l'app
   }
@@ -90,6 +95,24 @@ function Signin() {
           className="min-w-0 w-full space-y-9 rounded-2xl border border-white/80 bg-[#fffcf8] p-5 shadow-[0_16px_56px_-24px_rgba(91,49,21,0.22)] ring-1 ring-amber-900/8 sm:space-y-10 sm:rounded-3xl sm:p-9 lg:p-10"
         >
           <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
+            <div className="min-w-0 flex gap-6">
+              <input
+                type="radio"
+                name="typeOfAccount"
+                id="radioA"
+                value="privato"
+                checked={state.values.typeOfAccount === "privato"}
+                onClick={(e) => handleChange(e)}
+              />
+              <input
+                type="radio"
+                name="typeOfAccount"
+                id="radioP"
+                value="azienda"
+                checked={state.values.typeOfAccount === "azienda"}
+                onClick={(e) => handleChange(e)}
+              />
+            </div>
             <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
               Dati personali
             </legend>
@@ -164,34 +187,17 @@ function Signin() {
               </div>
               <div className="min-w-0">
                 <label
-                  htmlFor="telefono_mobile"
+                  htmlFor="mobile_phone"
                   className="block text-sm font-medium leading-5 text-amber-950/85"
                 >
                   Cellulare
                 </label>
                 <input
-                  id="telefono_mobile"
-                  name="telefono_mobile"
+                  id="mobile_phone"
+                  name="mobile_phone"
                   type="tel"
                   placeholder="+39 333 1234567"
                   autoComplete="mobile tel"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                />
-              </div>
-              <div className="min-w-0">
-                <label
-                  htmlFor="telefono_Fisso"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  Telefono fisso (facoltativo)
-                </label>
-                <input
-                  id="telefono_Fisso"
-                  name="telefono_Fisso"
-                  type="tel"
-                  placeholder="06 1234567"
-                  autoComplete="home tel"
                   onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
@@ -200,7 +206,7 @@ function Signin() {
           </fieldset>
           <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
             <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
-              Indirizzo
+              Indirizzo di Fatturazione
             </legend>
             <div className="mt-3 grid min-w-0 grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
               <div className="min-w-0">
@@ -290,98 +296,84 @@ function Signin() {
               </label>
             </div>
           </fieldset>
-          {!state.values.shippingAddress && <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
-            <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
-              Indirizzo di Spedizione
-            </legend>
-            <div className="mt-3 grid min-w-0 grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-              <div className="min-w-0">
-                <label
-                  htmlFor="via"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  Via o piazza
-                </label>
-                <input
-                  id="via"
-                  name="via"
-                  type="text"
-                  placeholder="Via dei Fiori"
-                  autoComplete="address-line1"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                />
+          {!state.values.shippingAddress && (
+            <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
+              <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
+                Indirizzo di Spedizione
+              </legend>
+              <div className="mt-3 grid min-w-0 grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+                <div className="min-w-0">
+                  <label
+                    htmlFor="via"
+                    className="block text-sm font-medium leading-5 text-amber-950/85"
+                  >
+                    Via o piazza
+                  </label>
+                  <input
+                    id="via"
+                    name="via"
+                    type="text"
+                    placeholder="Via dei Fiori"
+                    autoComplete="address-line1"
+                    onChange={(e) => handleChange(e)}
+                    className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <label
+                    htmlFor="civico"
+                    className="block text-sm font-medium leading-5 text-amber-950/85"
+                  >
+                    Numero civico
+                  </label>
+                  <input
+                    id="civico"
+                    name="civico"
+                    type="text"
+                    placeholder="12"
+                    autoComplete="address-line2"
+                    onChange={(e) => handleChange(e)}
+                    className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <label
+                    htmlFor="cap"
+                    className="block text-sm font-medium leading-5 text-amber-950/85"
+                  >
+                    CAP
+                  </label>
+                  <input
+                    id="cap"
+                    name="cap"
+                    type="text"
+                    placeholder="00100"
+                    autoComplete="postal-code"
+                    inputMode="numeric"
+                    onChange={(e) => handleChange(e)}
+                    className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <label
+                    htmlFor="via"
+                    className="block text-sm font-medium leading-5 text-amber-950/85"
+                  >
+                    Località
+                  </label>
+                  <input
+                    id="localita"
+                    name="localita"
+                    type="text"
+                    placeholder="Roma"
+                    autoComplete="address-level2"
+                    onChange={(e) => handleChange(e)}
+                    className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  />
+                </div>
               </div>
-              <div className="min-w-0">
-                <label
-                  htmlFor="civico"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  Numero civico
-                </label>
-                <input
-                  id="civico"
-                  name="civico"
-                  type="text"
-                  placeholder="12"
-                  autoComplete="address-line2"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                />
-              </div>
-              <div className="min-w-0">
-                <label
-                  htmlFor="cap"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  CAP
-                </label>
-                <input
-                  id="cap"
-                  name="cap"
-                  type="text"
-                  placeholder="00100"
-                  autoComplete="postal-code"
-                  inputMode="numeric"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                />
-              </div>
-              <div className="min-w-0">
-                <label
-                  htmlFor="via"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  Località
-                </label>
-                <input
-                  id="localita"
-                  name="localita"
-                  type="text"
-                  placeholder="Roma"
-                  autoComplete="address-level2"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                />
-              </div>
-            </div>
-            <div className="mt-6 flex min-w-0 items-start gap-3 rounded-xl border border-amber-900/10 bg-amber-50/70 p-4">
-              <input
-                id="indirizzo_spedizione"
-                name="indirizzo_spedizione"
-                type="checkbox"
-                checked={state.values.sameAddress}
-                onChange={(e) => handleChange(e)}
-                className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
-              />
-              <label
-                htmlFor="indirizzo_spedizione"
-                className="min-w-0 cursor-pointer text-sm leading-6 text-amber-950/80"
-              >
-                Usa questo indirizzo anche per la spedizione.
-              </label>
-            </div>
-          </fieldset>}
+            </fieldset>
+          )}
           <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
             <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
               Il tuo account
@@ -432,7 +424,7 @@ function Signin() {
                 name="newsletter"
                 type="checkbox"
                 checked={state.values.newsletter}
-                onChange={(e)=> handleChange(e)}
+                onChange={(e) => handleChange(e)}
                 className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700 required"
               />
               <label
@@ -450,7 +442,7 @@ function Signin() {
                 name="privacy"
                 type="checkbox"
                 checked={state.values.privacyPolicy}
-                onChange={(e)=> handleChange(e)}
+                onChange={(e) => handleChange(e)}
                 className="mt-0.5 size-5 shrink-0 cursor-pointer accent-amber-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
               />
               <label

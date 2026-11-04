@@ -9,7 +9,7 @@ function Modal() {
       onClick={() => uiDispatch({ type: "closeModal" })}
     >
       <div
-        className="relative flex flex-col h-[75%] w-[80%] bg-white justify-center shadow-md shadow-amber-900 rounded-xl p-4 "
+        className={`relative flex flex-col ${uiState.modalContent === "SIGNIN" ? "w-[90%] h-[90%]" : "w-[75%] h-[75%]"} bg-white justify-center shadow-md shadow-amber-900 rounded-xl p-4`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex w-full justify-center text-center absolute top-2">
@@ -24,7 +24,7 @@ function Modal() {
           X
         </button>
         {uiState.modalContent === "Spot" ? (
-          <div className="bg-red-600 w-[80%] h-[80%]">porco dio</div>
+          <div className={`bg-red-600 w-[80%] h-[80%]`}>porco dio</div>
         ) : uiState.modalContent === "SIGNIN" ? (
           <Signin />
         ) : (
