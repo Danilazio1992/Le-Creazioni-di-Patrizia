@@ -1,4 +1,5 @@
 ﻿import { useReducer } from "react";
+import { useEffect } from "react";
 const formInitialState = {
   values: {
     id: 0,
@@ -52,6 +53,13 @@ function Signin() {
     registrationFormReducer,
     formInitialState,
   );
+  useEffect(() => {
+  console.log(state.values.typeOfAccount)
+
+  return () => {
+    // Funzione di cleanup (opzionale)
+  };
+}, [state.values.typeOfAccount]);
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
     const finalValue = type === "checkbox" ? checked : value;
@@ -96,6 +104,8 @@ function Signin() {
         >
           <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
             <div className="min-w-0 flex gap-6">
+              <div className="flex justify-center items-center text-center gap-6 ">
+
               <input
                 type="radio"
                 name="typeOfAccount"
@@ -104,6 +114,7 @@ function Signin() {
                 checked={state.values.typeOfAccount === "privato"}
                 onClick={(e) => handleChange(e)}
               />
+              <label htmlFor="radioA" className=" flex ">Privato</label>
               <input
                 type="radio"
                 name="typeOfAccount"
@@ -112,6 +123,8 @@ function Signin() {
                 checked={state.values.typeOfAccount === "azienda"}
                 onClick={(e) => handleChange(e)}
               />
+              <label htmlFor="radioP" className=" flex "> Azienda </label>
+              </div>
             </div>
             <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
               Dati personali
@@ -168,7 +181,7 @@ function Signin() {
                   onChange={(e) => handleChange(e)}
                 />
               </div>
-              <div className="min-w-0">
+              {state.values.typeOfAccount === "privato"? <div className="min-w-0">
                 <label
                   htmlFor="codice_Fiscale"
                   className="block text-sm font-medium leading-5 text-amber-950/85"
@@ -180,17 +193,88 @@ function Signin() {
                   name="codice_Fiscale"
                   type="text"
                   placeholder="RSSMRA80A01H501U"
-                  autoComplete=""
+                  autoComplete="tax-id"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                />
+              </div> : <>
+              <div className="min-w-0">
+                <label
+                  htmlFor="nome_azienda"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                  >
+                  Nome Azienda
+                </label>
+                <input
+                  id="nome_azienda"
+                  name="nome_azienda"
+                  type="text"
+                  placeholder="ROSSI S.R.L."
+                  autoComplete="organization"
                   onChange={(e) => handleChange(e)}
                   className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
               </div>
               <div className="min-w-0">
                 <label
+                  htmlFor="partita_iva"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                >
+                  Partita IVA
+                </label>
+                <input
+                  id="partita_iva"
+                  name="partita_iva"
+                  type="text"
+                  placeholder="IT17602901005"
+                  autoComplete="vat"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  />
+              </div>
+              <div className="min-w-0">
+                <label
+                  htmlFor="codice_univoco"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                >
+                  Codice Univoco 
+                </label>
+                <input
+                  id="codice_univoco"
+                  name="codice_univoco"
+                  type="text"
+                  placeholder="USAL8PV"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  />
+              </div>
+              <div className="min-w-0">
+                <label
+                  htmlFor="pec"
+                  className="block text-sm font-medium leading-5 text-amber-950/85"
+                >
+                  PEC
+                </label>
+                <input
+                  id="pec"
+                  name="pec"
+                  type="text"
+                  placeholder="rossi@pec.com"
+                  autoComplete="email"
+                  onChange={(e) => handleChange(e)}
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  />
+              </div>
+                  </>
+               }
+              
+              
+              <div className="min-w-0">
+                <label
                   htmlFor="mobile_phone"
                   className="block text-sm font-medium leading-5 text-amber-950/85"
                 >
-                  Cellulare
+                  Telefono
                 </label>
                 <input
                   id="mobile_phone"
