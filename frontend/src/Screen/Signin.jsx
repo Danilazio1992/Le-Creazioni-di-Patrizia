@@ -1,23 +1,19 @@
-﻿import { useReducer } from "react";
-import { useEffect } from "react";
+﻿import { useEffect, useReducer } from "react";
 const formInitialState = {
   values: {
     id: 0,
     typeOfAccount: "privato",
     name: "",
+    cognome: "",
     email: "",
     password: "",
     role: "",
-    avatar: "",
     birthday: "",
     codice_Fiscale: "",
     mobile_phone: "",
-
     orders: [],
-    indirizzi: {
-      fatturazione: [],
-      spedizione: [],
-    },
+    fatturazione: {},
+    spedizione: {},
     newsletter: true,
     privacy: false,
     shippingAddress: true,
@@ -42,6 +38,17 @@ function registrationFormReducer(state, action) {
         ...state,
         values: { ...state.values, typeOfAccount: action.payload.finalValue },
       };
+    case "UPDATE_ADDRESS_FIELD":
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          [action.payload.typeOfAddress]: {
+            ...state.values[action.payload.typeOfAddress],
+            [action.payload.name]: action.payload.finalValue,
+          },
+        },
+      };
 
     default:
       return state; //return default sempre state cosi che in caso di azione non riconosciuta non si rompe l'app
@@ -54,12 +61,12 @@ function Signin() {
     formInitialState,
   );
   useEffect(() => {
-  console.log(state.values.typeOfAccount)
+    console.log(state.values.typeOfAccount);
 
-  return () => {
-    // Funzione di cleanup (opzionale)
-  };
-}, [state.values.typeOfAccount]);
+    return () => {
+      // Funzione di cleanup (opzionale)
+    };
+  }, [state.values.typeOfAccount]);
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
     const finalValue = type === "checkbox" ? checked : value;
@@ -75,6 +82,14 @@ function Signin() {
       return;
     }
     dispatch({ type: "UPDATE_FIELD", payload: { name, finalValue } });
+  };
+  const handleAddressChange = (e, typeOfAddress) => {
+    const { name, type, checked, value } = e.target;
+    const finalValue = type === "checkbox" ? checked : value;
+    dispatch({
+      type: "UPDATE_ADDRESS_FIELD",
+      payload: { name, finalValue, typeOfAddress },
+    });
   };
   return (
     <section
@@ -105,25 +120,29 @@ function Signin() {
           <fieldset className="min-w-0 border-t border-amber-900/12 pt-5">
             <div className="min-w-0 flex gap-6">
               <div className="flex justify-center items-center text-center gap-6 ">
-
-              <input
-                type="radio"
-                name="typeOfAccount"
-                id="radioA"
-                value="privato"
-                checked={state.values.typeOfAccount === "privato"}
-                onClick={(e) => handleChange(e)}
-              />
-              <label htmlFor="radioA" className=" flex ">Privato</label>
-              <input
-                type="radio"
-                name="typeOfAccount"
-                id="radioP"
-                value="azienda"
-                checked={state.values.typeOfAccount === "azienda"}
-                onClick={(e) => handleChange(e)}
-              />
-              <label htmlFor="radioP" className=" flex "> Azienda </label>
+                <input
+                  type="radio"
+                  name="typeOfAccount"
+                  id="radioA"
+                  value="privato"
+                  checked={state.values.typeOfAccount === "privato"}
+                  onClick={(e) => handleChange(e)}
+                />
+                <label htmlFor="radioA" className=" flex ">
+                  Privato
+                </label>
+                <input
+                  type="radio"
+                  name="typeOfAccount"
+                  id="radioP"
+                  value="azienda"
+                  checked={state.values.typeOfAccount === "azienda"}
+                  onClick={(e) => handleChange(e)}
+                />
+                <label htmlFor="radioP" className=" flex ">
+                  {" "}
+                  Azienda{" "}
+                </label>
               </div>
             </div>
             <legend className="max-w-full pr-4 text-lg font-semibold tracking-tight text-amber-950">
@@ -181,94 +200,96 @@ function Signin() {
                   onChange={(e) => handleChange(e)}
                 />
               </div>
-              {state.values.typeOfAccount === "privato"? <div className="min-w-0">
-                <label
-                  htmlFor="codice_Fiscale"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  Codice fiscale
-                </label>
-                <input
-                  id="codice_Fiscale"
-                  name="codice_Fiscale"
-                  type="text"
-                  placeholder="RSSMRA80A01H501U"
-                  autoComplete="tax-id"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                />
-              </div> : <>
-              <div className="min-w-0">
-                <label
-                  htmlFor="nome_azienda"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
+              {state.values.typeOfAccount === "privato" ? (
+                <div className="min-w-0">
+                  <label
+                    htmlFor="codice_Fiscale"
+                    className="block text-sm font-medium leading-5 text-amber-950/85"
                   >
-                  Nome Azienda
-                </label>
-                <input
-                  id="nome_azienda"
-                  name="nome_azienda"
-                  type="text"
-                  placeholder="ROSSI S.R.L."
-                  autoComplete="organization"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                />
-              </div>
-              <div className="min-w-0">
-                <label
-                  htmlFor="partita_iva"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  Partita IVA
-                </label>
-                <input
-                  id="partita_iva"
-                  name="partita_iva"
-                  type="text"
-                  placeholder="IT17602901005"
-                  autoComplete="vat"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                    Codice fiscale
+                  </label>
+                  <input
+                    id="codice_Fiscale"
+                    name="codice_Fiscale"
+                    type="text"
+                    placeholder="RSSMRA80A01H501U"
+                    autoComplete="tax-id"
+                    onChange={(e) => handleChange(e)}
+                    className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                   />
-              </div>
-              <div className="min-w-0">
-                <label
-                  htmlFor="codice_univoco"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  Codice Univoco 
-                </label>
-                <input
-                  id="codice_univoco"
-                  name="codice_univoco"
-                  type="text"
-                  placeholder="USAL8PV"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                  />
-              </div>
-              <div className="min-w-0">
-                <label
-                  htmlFor="pec"
-                  className="block text-sm font-medium leading-5 text-amber-950/85"
-                >
-                  PEC
-                </label>
-                <input
-                  id="pec"
-                  name="pec"
-                  type="text"
-                  placeholder="rossi@pec.com"
-                  autoComplete="email"
-                  onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
-                  />
-              </div>
-                  </>
-               }
-              
-              
+                </div>
+              ) : (
+                <>
+                  <div className="min-w-0">
+                    <label
+                      htmlFor="nome_azienda"
+                      className="block text-sm font-medium leading-5 text-amber-950/85"
+                    >
+                      Nome Azienda
+                    </label>
+                    <input
+                      id="nome_azienda"
+                      name="nome_azienda"
+                      type="text"
+                      placeholder="ROSSI S.R.L."
+                      autoComplete="organization"
+                      onChange={(e) => handleChange(e)}
+                      className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <label
+                      htmlFor="partita_iva"
+                      className="block text-sm font-medium leading-5 text-amber-950/85"
+                    >
+                      Partita IVA
+                    </label>
+                    <input
+                      id="partita_iva"
+                      name="partita_iva"
+                      type="text"
+                      placeholder="IT17602901005"
+                      autoComplete="vat"
+                      onChange={(e) => handleChange(e)}
+                      className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <label
+                      htmlFor="codice_univoco"
+                      className="block text-sm font-medium leading-5 text-amber-950/85"
+                    >
+                      Codice Univoco
+                    </label>
+                    <input
+                      id="codice_univoco"
+                      name="codice_univoco"
+                      type="text"
+                      placeholder="USAL8PV"
+                      onChange={(e) => handleChange(e)}
+                      className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <label
+                      htmlFor="pec"
+                      className="block text-sm font-medium leading-5 text-amber-950/85"
+                    >
+                      PEC
+                    </label>
+                    <input
+                      id="pec"
+                      name="pec"
+                      type="text"
+                      placeholder="rossi@pec.com"
+                      autoComplete="email"
+                      onChange={(e) => handleChange(e)}
+                      className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                    />
+                  </div>
+                </>
+              )}
+
               <div className="min-w-0">
                 <label
                   htmlFor="mobile_phone"
@@ -399,7 +420,8 @@ function Signin() {
                     type="text"
                     placeholder="Via dei Fiori"
                     autoComplete="address-line1"
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => handleAddressChange(e, "spedizione")}
+
                     className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                   />
                 </div>
@@ -416,7 +438,7 @@ function Signin() {
                     type="text"
                     placeholder="12"
                     autoComplete="address-line2"
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => handleAddressChange(e, "spedizione")}
                     className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                   />
                 </div>
@@ -434,7 +456,7 @@ function Signin() {
                     placeholder="00100"
                     autoComplete="postal-code"
                     inputMode="numeric"
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => handleAddressChange(e, "spedizione")}
                     className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                   />
                 </div>
@@ -451,7 +473,7 @@ function Signin() {
                     type="text"
                     placeholder="Roma"
                     autoComplete="address-level2"
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => handleAddressChange(e, "spedizione")}
                     className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                   />
                 </div>
