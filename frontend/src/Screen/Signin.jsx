@@ -1,4 +1,4 @@
-﻿import { useEffect, useReducer } from "react";
+﻿import { useReducer } from "react";
 import { formInitialState, registrationFormReducer } from "./SigninReducer";
 
 function Signin() {
@@ -37,6 +37,10 @@ function Signin() {
       type: "UPDATE_ADDRESS_FIELD",
       payload: { name, finalValue, typeOfAddress },
     });
+  };
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    dispatch({ type: "SET_FIELD_ERROR", payload: { name } });
   };
   return (
     <section
@@ -452,6 +456,7 @@ function Signin() {
                   value={state.values.email}
                   autoComplete="email"
                   onChange={(e) => handleChange(e)}
+                  onBlur={(e) => handleBlur(e)}
                   required
                   className="peer invalid:border-2 invalid:border-red-700 mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
@@ -483,7 +488,6 @@ function Signin() {
             </div>
           </fieldset>
           <div className="mt-6 flex flex-col gap-4 rounded-xl border border-amber-900/10 bg-amber-50/70 p-4">
-            {/* NEWSLETTER (Opzionale) */}
             <div className="flex min-w-0 items-start gap-3">
               <input
                 id="newsletter"
@@ -500,8 +504,6 @@ function Signin() {
                 Iscriviti alla Newsletter per ricevere aggiornamenti e offerte.
               </label>
             </div>
-
-            {/* PRIVACY POLICY (Obbligatorio) */}
             <div className="flex min-w-0 items-start gap-3">
               <input
                 id="privacy"
@@ -542,7 +544,7 @@ function Signin() {
               type="submit"
               className="inline-flex min-h-12 w-full min-w-0 max-w-full items-center justify-center rounded-lg border border-amber-950/10 bg-amber-900 px-8 py-3 text-center text-sm font-semibold leading-6 text-amber-50 shadow-sm transition-[background-color,box-shadow] duration-150 hover:bg-amber-800 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700 active:bg-amber-950 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none sm:w-auto"
               onClick={(e) => {
-                (e.preventDefault(), console.log(state.values));
+                (e.preventDefault(), console.log(state));
               }}
             >
               Crea account

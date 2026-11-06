@@ -48,6 +48,14 @@ export function registrationFormReducer(state, action) {
           },
         },
       };
+    case "SET_FIELD_ERROR":
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          [action.payload.name]: true,
+        },
+      };
 
     default:
       return state; //return default sempre state cosi che in caso di azione non riconosciuta non si rompe l'app
