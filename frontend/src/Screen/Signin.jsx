@@ -1,76 +1,16 @@
 ﻿import { useEffect, useReducer } from "react";
-const formInitialState = {
-  values: {
-    id: 0,
-    typeOfAccount: "privato",
-    name: "",
-    cognome: "",
-    email: "",
-    password: "",
-    role: "",
-    birthday: "",
-    codice_Fiscale: "",
-    mobile_phone: "",
-    orders: [],
-    fatturazione: {},
-    spedizione: {},
-    newsletter: true,
-    privacy: false,
-    shippingAddress: true,
-  },
-  errors: {},
-};
-
-function registrationFormReducer(state, action) {
-  switch (action.type) {
-    case "UPDATE_FIELD":
-      return {
-        ...state,
-        values: {
-          ...state.values,
-          [action.payload.name]: action.payload.finalValue,
-        },
-      };
-    case "RESET_FIELD":
-      return { ...state, isModal: false, modalContent: null };
-    case "TYPE_OF_ACCOUNT":
-      return {
-        ...state,
-        values: { ...state.values, typeOfAccount: action.payload.finalValue },
-      };
-    case "UPDATE_ADDRESS_FIELD":
-      return {
-        ...state,
-        values: {
-          ...state.values,
-          [action.payload.typeOfAddress]: {
-            ...state.values[action.payload.typeOfAddress],
-            [action.payload.name]: action.payload.finalValue,
-          },
-        },
-      };
-
-    default:
-      return state; //return default sempre state cosi che in caso di azione non riconosciuta non si rompe l'app
-  }
-}
+import { formInitialState, registrationFormReducer } from "./SigninReducer";
 
 function Signin() {
   const [state, dispatch] = useReducer(
     registrationFormReducer,
     formInitialState,
   );
-  useEffect(() => {
-    console.log(state.values.typeOfAccount);
-
-    return () => {
-      // Funzione di cleanup (opzionale)
-    };
-  }, [state.values.typeOfAccount]);
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
     const finalValue = type === "checkbox" ? checked : value;
     const emailInvalidCharsRegex = /[^a-zA-Z0-9._%+-@]/;
+    const capValidCharsRegex = /^[A-Za-z0-9]*$/;
     const passwordInvalidCharsRegex =
       // eslint-disable-next-line no-useless-escape
       /[^a-zA-Z0-9!@#$%^&*()_\-+=\[\]{};:'",.<>/?|\\]/;
@@ -81,11 +21,18 @@ function Signin() {
     if (name === "password" && passwordInvalidCharsRegex.test(finalValue)) {
       return;
     }
+    if (name === "cap" && !capValidCharsRegex.test(finalValue)) {
+      return;
+    }
     dispatch({ type: "UPDATE_FIELD", payload: { name, finalValue } });
   };
   const handleAddressChange = (e, typeOfAddress) => {
     const { name, type, checked, value } = e.target;
     const finalValue = type === "checkbox" ? checked : value;
+    const capValidCharsRegex = /^[0-9 ]*$/;
+    if (name === "cap" && !capValidCharsRegex.test(finalValue)) {
+      return;
+    }
     dispatch({
       type: "UPDATE_ADDRESS_FIELD",
       payload: { name, finalValue, typeOfAddress },
@@ -164,7 +111,7 @@ function Signin() {
                   placeholder="Mario"
                   autoComplete="given-name"
                   onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none required"
                 />
               </div>
               <div className="min-w-0">
@@ -439,7 +386,8 @@ function Signin() {
                     placeholder="12"
                     autoComplete="address-line2"
                     onChange={(e) => handleAddressChange(e, "spedizione")}
-                    className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                    required
+                    className=" invalid:border-2 invalid:border-red-700 mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                   />
                 </div>
                 <div className="min-w-0">
@@ -455,7 +403,7 @@ function Signin() {
                     type="text"
                     placeholder="00100"
                     autoComplete="postal-code"
-                    inputMode="numeric"
+                    value={state.values.spedizione?.cap || ""}
                     onChange={(e) => handleAddressChange(e, "spedizione")}
                     className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                   />
@@ -463,7 +411,7 @@ function Signin() {
                 <div className="min-w-0">
                   <label
                     htmlFor="via"
-                    className="block text-sm font-medium leading-5 text-amber-950/85"
+                    className="block text-sm font-medium leading-5 text-amber-950/85 peer-required:after:content-['*'] peer-required:after:ml-0.5 peer-required:after:text-red-500"
                   >
                     Località
                   </label>
@@ -474,8 +422,12 @@ function Signin() {
                     placeholder="Roma"
                     autoComplete="address-level2"
                     onChange={(e) => handleAddressChange(e, "spedizione")}
-                    className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                    required
+                    className="peer invalid:border-2 invalid:border-red-700 mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                   />
+                  <p className="order-3 hidden peer-invalid:block text-xs text-red-600 mt-1">
+                    Questo campo è obbligatorio.
+                  </p>
                 </div>
               </div>
             </fieldset>
@@ -500,8 +452,12 @@ function Signin() {
                   value={state.values.email}
                   autoComplete="email"
                   onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  required
+                  className="peer invalid:border-2 invalid:border-red-700 mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
+                <p className="order-3 hidden peer-invalid:block text-xs text-red-600 mt-1">
+                  Questo campo è obbligatorio.
+                </p>
               </div>
               <div className="min-w-0">
                 <label
@@ -517,8 +473,12 @@ function Signin() {
                   placeholder="Scegli una password"
                   autoComplete="new-password"
                   onChange={(e) => handleChange(e)}
-                  className="mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
+                  required
+                  className="peer invalid:border-2 invalid:border-red-700 mt-2 block min-h-12 min-w-0 w-full max-w-full rounded-lg border border-amber-900/20 bg-white px-3.5 py-3 text-base leading-6 text-amber-950 shadow-xs transition-[border-color,box-shadow] duration-150 placeholder:text-stone-500 hover:border-amber-900/40 focus-visible:border-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700/20 disabled:cursor-not-allowed disabled:bg-stone-100 disabled:text-stone-500 motion-reduce:transition-none"
                 />
+                <p className="order-3 hidden peer-invalid:block text-xs text-red-600 mt-1">
+                  Questo campo è obbligatorio.
+                </p>
               </div>
             </div>
           </fieldset>
@@ -579,9 +539,11 @@ function Signin() {
             </p>
             {/* Cambia in submit quando colleghi la gestione del form. */}
             <button
-              type="button"
+              type="submit"
               className="inline-flex min-h-12 w-full min-w-0 max-w-full items-center justify-center rounded-lg border border-amber-950/10 bg-amber-900 px-8 py-3 text-center text-sm font-semibold leading-6 text-amber-50 shadow-sm transition-[background-color,box-shadow] duration-150 hover:bg-amber-800 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700 active:bg-amber-950 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none sm:w-auto"
-              onClick={() => console.log(state.values)}
+              onClick={(e) => {
+                (e.preventDefault(), console.log(state.values));
+              }}
             >
               Crea account
             </button>
